@@ -81,14 +81,14 @@ class SeoUri extends SeoAppModel {
 		)
 	);
 
-	/**
-	 * Filter fields
-	 *
-	 * @var array
-	 */
-	public $searchFields = array(
-		'SeoUri.id','SeoUri.uri'
-	);
+    /**
+     * Default filter args for building search queries using the searchable behavior
+     *
+     * @var array
+     */
+    public $filterArgs = array (
+        'uri' => array('type' => 'like'),
+    );
 
 	/**
 	 * If saving a regular expression, make sure to mark not approved unless

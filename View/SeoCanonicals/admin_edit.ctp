@@ -1,22 +1,27 @@
-<div class="seo_plugin">
-	<?php echo $this->element('seo_view_head', array('plugin' => 'seo')); ?>
-	<div class="seoCanonicals form">
-	<?php echo $this->Form->create('SeoCanonical');?>
-		<fieldset>
-			<legend><?php echo __('Admin Edit Seo Canonical'); ?></legend>
-		<?php
-			echo $this->Form->input('id');
-			echo $this->Form->input('SeoUri.uri');
-			echo $this->Form->input('canonical', array('label' => 'Canonical Link'));
-			echo $this->Form->input('is_active');
-		?>
-		</fieldset>
-	<?php echo $this->Form->end(__('Submit'));?>
+<?php $this->assign('title', 'Edit Canonical Link');?>
+<div class="row-fluid">
+    <div class="span9">
+        <?php echo $this->element('Canonical/form'); ?>
 	</div>
-	<div class="actions">
-		<h3><?php echo __('Actions'); ?></h3>
-		<ul>
-			<li><?php echo $this->Html->link(__('Delete'), array('action' => 'delete', $this->Form->value('SeoCanonical.id')), null, sprintf(__('Are you sure you want to delete # %s?'), $this->Form->value('SeoCanonical.id'))); ?></li>
-		</ul>
-	</div>
+    <div class="span3">
+        <div class="widget no-margin">
+            <div class="widget-header">
+                <div class="title">
+                    <?php echo _('Actions'); ?>
+                </div>
+            </div>
+            <div class="widget-body">
+                <ul>
+                    <li>
+                        <?php
+                        echo $this->Html->link(
+                            _('List Canonical Links'),
+                            array('action' => 'index')
+                        );
+                        ?>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>

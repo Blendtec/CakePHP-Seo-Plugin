@@ -2,7 +2,6 @@
 class SeoBlacklistsController extends SeoAppController {
 
 	var $name = 'SeoBlacklists';
-	var $helpers = array('Time');
 	
 	function beforeFilter(){
 		parent::beforeFilter();

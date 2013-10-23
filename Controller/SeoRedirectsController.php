@@ -2,7 +2,6 @@
 class SeoRedirectsController extends SeoAppController {
 
 	var $name = 'SeoRedirects';
-	var $helpers = array('Time');
 	
 	function admin_index($filter = null) {
 		if(!empty($this->data)){

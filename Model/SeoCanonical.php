@@ -4,10 +4,10 @@ class SeoCanonical extends SeoAppModel {
 	var $displayField = 'canonical';
 	var $validate = array(
 		'seo_uri_id' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
-				'message' => 'Uri Must be present',
-			),
+            'notempty' => array(
+                'rule' => array('notempty'),
+                'message' => 'Uri required',
+            ),
 		),
 		'canonical' => array(
 			'notempty' => array(
@@ -30,13 +30,16 @@ class SeoCanonical extends SeoAppModel {
 			'foreignKey' => 'seo_uri_id',
 		)
 	);
-	
-	/**
-	* Filter fields
-	*/
-	var $searchFields = array(
-		'SeoCanonical.id','SeoCanonical.canonical','SeoUri.uri'
-	);
+
+    /**
+     * Default filter args for building search queries using the searchable behavior
+     *
+     * @var array
+     */
+    public $filterArgs = array (
+        'canonical' => array ('type' => 'like', 'empty' => true),
+        'uri' => array('type' => 'like', 'field' => array('uri')),
+    );
 	
 	/**
 	* Assign or create the url.

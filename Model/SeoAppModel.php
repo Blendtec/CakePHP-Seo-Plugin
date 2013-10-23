@@ -13,7 +13,7 @@ class SeoAppModel extends AppModel {
 	 *
 	 * var array
 	 */
-	public $actsAs = array('Containable');
+	public $actsAs = array('Containable', 'Search.Searchable');
 
 	/**
 	 * Always set recursive = 0

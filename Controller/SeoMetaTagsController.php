@@ -2,15 +2,12 @@
 class SeoMetaTagsController extends SeoAppController {
 
 	var $name = 'SeoMetaTags';
-	var $helpers = array('Time');
 	
-	function admin_index($filter = null) {
-		if(!empty($this->data)){
-			$filter = $this->data['SeoMetaTag']['filter'];
-		}
-		$conditions = $this->SeoMetaTag->generateFilterConditions($filter);
-		$this->set('seoMetaTags',$this->paginate($conditions));
-		$this->set('filter', $filter);
+	function admin_index() {
+        $this->Prg->commonProcess($this->model->alias, array('action' => 'index'));
+        $this->Paginator->settings['conditions']
+            = $this->SeoMetaTag->parseCriteria($this->passedArgs);
+        $this->set('seoMetaTags', $this->Paginator->paginate($this->model->alias));
 	}
 	
 	function admin_view($id = null) {

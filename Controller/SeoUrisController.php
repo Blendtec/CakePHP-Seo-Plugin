@@ -2,30 +2,27 @@
 class SeoUrisController extends SeoAppController {
 
 	var $name = 'SeoUris';
-	var $helpers = array('Time');
 	var $uses = array('Seo.SeoUri');
 	
 	private function clearAssociatesIfEmpty(){
-		foreach($this->data['SeoMetaTag'] as $key => $metatag){
+		foreach($this->request->data['SeoMetaTag'] as $key => $metatag){
 			if(isset($metatag['name']) && empty($metatag['name'])){
-				unset($this->data['SeoMetaTag'][$key]);
+				unset($this->request->data['SeoMetaTag'][$key]);
 			}
 		}
-		if(empty($this->data['SeoMetaTag'])){
-			unset($this->data['SeoMetaTag']);
+		if(empty($this->request->data['SeoMetaTag'])){
+			unset($this->request->data['SeoMetaTag']);
 		}
-		if(isset($this->data['SeoTitle']['title']) && empty($this->data['SeoTitle']['title'])){
-			unset($this->data['SeoTitle']);
+		if(isset($this->request->data['SeoTitle']['title']) && empty($this->request->data['SeoTitle']['title'])){
+			unset($this->request->data['SeoTitle']);
 		}
 	}
 	
-	function admin_index($filter = null) {
-		if(!empty($this->data)){
-			$filter = $this->data['SeoUri']['filter'];
-		}
-		$conditions = $this->SeoUri->generateFilterConditions($filter);
-		$this->set('seoUris',$this->paginate($conditions));
-		$this->set('filter', $filter);
+	function admin_index() {
+        $this->Prg->commonProcess(null, array('action' => 'index'));
+        $this->Paginator->settings['conditions']
+            = $this->SeoUri->parseCriteria($this->passedArgs);
+        $this->set('seoUris', $this->Paginator->paginate($this->model->alias));
 	}
 	
 	function admin_urlencode($id = null){
@@ -48,10 +45,10 @@ class SeoUrisController extends SeoAppController {
 	}
 
 	function admin_add() {
-		if (!empty($this->data)) {
+		if (!empty($this->request->data)) {
 			$this->SeoUri->clear();
 			$this->clearAssociatesIfEmpty();
-			if ($this->SeoUri->saveAll($this->data)) {
+			if ($this->SeoUri->saveAll($this->request->data)) {
 				$this->Session->setFlash(__('The seo uri has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {
@@ -61,21 +58,22 @@ class SeoUrisController extends SeoAppController {
 	}
 
 	function admin_edit($id = null) {
-		if (!$id && empty($this->data)) {
+		if (!$id && empty($this->request->data)) {
 			$this->Session->setFlash(__('Invalid seo uri'));
 			$this->redirect(array('action' => 'index'));
 		}
-		if (!empty($this->data)) {
+		if (!empty($this->request->data)) {
 			$this->clearAssociatesIfEmpty();
-			if ($this->SeoUri->save($this->data)) {
+            Debugger::dump($this->request->data);
+			if ($this->SeoUri->saveAll($this->request->data)) {
 				$this->Session->setFlash(__('The seo uri has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The seo uri could not be saved. Please, try again.'));
 			}
 		}
-		if (empty($this->data)) {
-			$this->data = $this->SeoUri->findForViewById($id);
+		if (empty($this->request->data)) {
+			$this->request->data = $this->SeoUri->findForViewById($id);
 		}
 		$this->set('status_codes', $this->SeoUri->SeoStatusCode->findCodeList());
 		$this->set('id', $id);

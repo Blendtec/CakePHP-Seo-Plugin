@@ -1,16 +1,14 @@
 <?php
+App::uses('SeoAppController', 'Seo.Controller');
 class SeoTitlesController extends SeoAppController {
 
 	var $name = 'SeoTitles';
-	var $helpers = array('Time');
 	
-	function admin_index($filter = null) {
-		if(!empty($this->data)){
-			$filter = $this->data['SeoTitle']['filter'];
-		}
-		$conditions = $this->SeoTitle->generateFilterConditions($filter);
-		$this->set('seoTitles',$this->paginate($conditions));
-		$this->set('filter', $filter);
+	function admin_index() {
+        $this->Prg->commonProcess($this->model->alias, array('action' => 'index'));
+        $this->Paginator->settings['conditions']
+            = $this->SeoTitle->parseCriteria($this->passedArgs);
+        $this->set('seoTitles', $this->Paginator->paginate($this->model->alias));
 	}
 
 	function admin_view($id = null) {

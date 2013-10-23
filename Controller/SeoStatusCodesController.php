@@ -2,7 +2,6 @@
 class SeoStatusCodesController extends SeoAppController {
 
 	var $name = 'SeoStatusCodes';
-	var $helpers = array('Time');
 	
 	function admin_index($filter = null) {
 		if(!empty($this->data)){

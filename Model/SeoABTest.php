@@ -21,10 +21,10 @@ class SeoABTest extends SeoAppModel {
  */
 	public $validate = array(
 		'seo_uri_id' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
-				'message' => 'Must be associated to an seo_uri',
-			),
+            'notempty' => array(
+                'rule' => array('notempty'),
+                'message' => 'Uri required',
+            ),
 		),
 		'priority' => array(
 			'numeric' => array(

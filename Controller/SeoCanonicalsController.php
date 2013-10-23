@@ -2,16 +2,12 @@
 class SeoCanonicalsController extends SeoAppController {
 
 	var $name = 'SeoCanonicals';
-	
-	var $helpers = array('Time');
 
-	function admin_index($filter = null) {
-		if(!empty($this->data)){
-			$filter = $this->data['SeoCanonical']['filter'];
-		}
-		$conditions = $this->SeoCanonical->generateFilterConditions($filter);
-		$this->set('seoCanonicals',$this->paginate($conditions));
-		$this->set('filter', $filter);
+	function admin_index() {
+        $this->Prg->commonProcess($this->model->alias, array('action' => 'index'));
+        $this->Paginator->settings['conditions']
+            = $this->SeoCanonical->parseCriteria($this->passedArgs);
+        $this->set('seoCanonicals', $this->Paginator->paginate($this->model->alias));
 	}
 
 	function admin_view($id = null) {

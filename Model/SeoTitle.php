@@ -54,14 +54,15 @@ class SeoTitle extends SeoAppModel {
 		)
 	);
 
-	/**
-	 * Filter fields
-	 *
-	 * @var array
-	 */
-	public $searchFields = array(
-		'SeoTitle.id','SeoTitle.title','SeoTitle.id','SeoUri.uri'
-	);
+    /**
+     * Default filter args for building search queries using the searchable behavior
+     *
+     * @var array
+     */
+    public $filterArgs = array (
+        'title' => array ('type' => 'like'),
+        'uri' => array('type' => 'like', 'field' => array('SeoUri.uri')),
+    );
 
 	/**
 	* Assign or create the url.

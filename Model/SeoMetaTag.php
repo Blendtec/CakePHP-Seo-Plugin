@@ -4,10 +4,10 @@ class SeoMetaTag extends SeoAppModel {
 	var $displayField = 'name';
 	var $validate = array(
 		'seo_uri_id' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
-				'message' => 'must be numeric',
-			),
+            'notempty' => array(
+                'rule' => array('notempty'),
+                'message' => 'Uri required',
+            ),
 		),
 		'name' => array(
 			'notempty' => array(
@@ -34,13 +34,17 @@ class SeoMetaTag extends SeoAppModel {
 			'foreignKey' => 'seo_uri_id',
 		)
 	);
-	
-	/**
-	* Filter fields
-	*/
-	var $searchFields = array(
-		'SeoMetaTag.name','SeoMetaTag.content','SeoMetaTag.id','SeoUri.uri'
-	);
+
+    /**
+     * Default filter args for building search queries using the searchable behavior
+     *
+     * @var array
+     */
+    public $filterArgs = array (
+        'name' => array ('type' => 'like', 'empty' => true),
+        'content' => array ('type' => 'like', 'empty' => true),
+        'uri' => array('type' => 'like', 'field' => array('SeoUri.uri')),
+    );
 	
 	function beforeSave($options = array()){
 		$this->createOrSetUri();

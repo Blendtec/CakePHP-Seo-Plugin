@@ -1,7 +1,6 @@
-<div class="seo_plugin">
-	<?php echo $this->element('seo_view_head', array('plugin' => 'seo')); ?>
-	<div class="seoMetaTags view">
-	<h2><?php echo __('Seo Meta Tag');?></h2>
+<?php $this->assign('title', __('Meta Tag'));?>
+<div class="row-fluid">
+	<div class="span9">
 		<dl><?php $i = 0; $class = ' class="altrow"';?>
 			<dt<?php if ($i % 2 == 0) echo $class;?>><?php echo __('Id'); ?></dt>
 			<dd<?php if ($i++ % 2 == 0) echo $class;?>>
@@ -40,11 +39,20 @@
 			</dd>
 		</dl>
 	</div>
-	<div class="actions">
-		<h3><?php echo __('Actions'); ?></h3>
-		<ul>
-			<li><?php echo $this->Html->link(__('Edit Seo Meta Tag'), array('action' => 'edit', $seoMetaTag['SeoMetaTag']['id'])); ?> </li>
-			<li><?php echo $this->Html->link(__('Delete Seo Meta Tag'), array('action' => 'delete', $seoMetaTag['SeoMetaTag']['id']), null, sprintf(__('Are you sure you want to delete # %s?'), $seoMetaTag['SeoMetaTag']['id'])); ?> </li>
-		</ul>
-	</div>
+	<div class="span3">
+        <div class="widget no-margin">
+            <div class="widget-header">
+                <div class="title">
+                    <?php echo __('Actions'); ?>
+                </div>
+            </div>
+            <div class="widget-body">
+                <ul>
+                    <li><?php echo $this->Html->link(__('List Meta Tags'), array('action' => 'index')); ?> </li>
+                    <li><?php echo $this->Html->link(__('Edit Meta Tag'), array('action' => 'edit', $seoMetaTag['SeoMetaTag']['id'])); ?> </li>
+                    <li><?php echo $this->Html->link(__('Delete Meta Tag'), array('action' => 'delete', $seoMetaTag['SeoMetaTag']['id']), null, sprintf(__('Are you sure you want to delete # %s?'), $seoMetaTag['SeoMetaTag']['id'])); ?> </li>
+                </ul>
+            </div>
+	    </div>
+    </div>
 </div>

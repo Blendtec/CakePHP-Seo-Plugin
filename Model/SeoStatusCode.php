@@ -4,10 +4,10 @@ class SeoStatusCode extends SeoAppModel {
 	var $displayField = 'seo_uri_id';
 	var $validate = array(
 		'seo_uri_id' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
-				'message' => 'Must be assigned to a SeoUri',
-			),
+            'notempty' => array(
+                'rule' => array('notempty'),
+                'message' => 'Uri required',
+            ),
 		),
 		'status_code' => array(
 			'numeric' => array(
