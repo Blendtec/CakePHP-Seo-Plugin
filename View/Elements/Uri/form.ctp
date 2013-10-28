@@ -15,30 +15,12 @@
     <hr/>
     <h3>Meta Tags</h3>
     <fieldset>
-        <legend><?php echo __('Meta Tag 1')?></legend>
+        <legend><?php echo __('Meta Tag')?></legend>
         <?php
             echo $this->Form->hidden('SeoMetaTag.0.id');
             echo $this->Form->input('SeoMetaTag.0.name');
             echo $this->Form->input('SeoMetaTag.0.content');
             echo $this->Form->input('SeoMetaTag.0.is_http_equiv', array('label' => 'Http Equiv'));
-        ?>
-    </fieldset>
-    <fieldset>
-        <legend><?php echo __('Meta Tag 2')?></legend>
-        <?php
-            echo $this->Form->hidden('SeoMetaTag.1.id');
-            echo $this->Form->input('SeoMetaTag.1.name');
-            echo $this->Form->input('SeoMetaTag.1.content');
-            echo $this->Form->input('SeoMetaTag.1.is_http_equiv', array('label' => 'Http Equiv'));
-        ?>
-    </fieldset>
-    <fieldset>
-        <legend><?php echo __('Meta Tag 3')?></legend>
-        <?php
-            echo $this->Form->hidden('SeoMetaTag.2.id');
-            echo $this->Form->input('SeoMetaTag.2.name');
-            echo $this->Form->input('SeoMetaTag.2.content');
-            echo $this->Form->input('SeoMetaTag.2.is_http_equiv', array('label' => 'Http Equiv'));
         ?>
     </fieldset>
 </fieldset>
