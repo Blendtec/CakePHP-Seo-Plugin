@@ -19,7 +19,7 @@
         <?php
             echo $this->Form->hidden('SeoMetaTag.0.id');
             echo $this->Form->input('SeoMetaTag.0.name');
-            echo $this->Form->input('SeoMetaTag.0.content');
+            echo $this->Form->textArea('SeoMetaTag.0.content');
             echo $this->Form->input('SeoMetaTag.0.is_http_equiv', array('label' => 'Http Equiv'));
         ?>
     </fieldset>

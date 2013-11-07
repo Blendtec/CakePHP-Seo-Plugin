@@ -4,7 +4,7 @@
         echo $this->Form->input('id');
         echo $this->Form->input('SeoUri.uri');
         echo $this->Form->input('name');
-        echo $this->Form->input('content');
+        echo $this->Form->textarea('content');
         echo $this->Form->input('is_http_equiv');
         ?>
     </fieldset>
