@@ -16,14 +16,14 @@ class SeoUrisController extends SeoAppController {
 		}
 	}
 	
-	function admin_index() {
+	public function admin_index() {
         $this->Prg->commonProcess(null, array('action' => 'index'));
         $this->Paginator->settings['conditions']
             = $this->SeoUri->parseCriteria($this->passedArgs);
         $this->set('seoUris', $this->Paginator->paginate($this->SeoUri->alias));
 	}
 	
-	function admin_urlencode($id = null){
+	public function admin_urlencode($id = null){
 		if($this->SeoUri->urlEncode($id)){
 			$this->Session->setFlash("uri Successfully Url Encoded.");
 		}
@@ -33,7 +33,7 @@ class SeoUrisController extends SeoAppController {
 		$this->redirect(array('action' => 'view', $id));
 	}
 
-	function admin_view($id = null) {
+	public function admin_view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid seo uri'));
 			$this->redirect(array('action' => 'index'));
@@ -42,7 +42,7 @@ class SeoUrisController extends SeoAppController {
 		$this->set('id', $id);
 	}
 
-	function admin_add() {
+	public function admin_add() {
 		if (!empty($this->request->data)) {
 			$this->SeoUri->clear();
 			$this->clearAssociatesIfEmpty();
@@ -55,7 +55,7 @@ class SeoUrisController extends SeoAppController {
 		}
 	}
 
-	function admin_edit($id = null) {
+	public function admin_edit($id = null) {
 		if (!$id && empty($this->request->data)) {
 			$this->Session->setFlash(__('Invalid seo uri'));
 			$this->redirect(array('action' => 'index'));
@@ -77,7 +77,7 @@ class SeoUrisController extends SeoAppController {
 		$this->set('id', $id);
 	}
 
-	function admin_delete($id = null) {
+	public function admin_delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for seo uri'));
 			$this->redirect(array('action'=>'index'));
@@ -90,7 +90,7 @@ class SeoUrisController extends SeoAppController {
 		$this->redirect(array('action' => 'index'));
 	}
 	
-	function admin_approve($id = null){
+	public function admin_approve($id = null){
 	  if(!$id) {
 			$this->Session->setFlash(__('Invalid id for seo uri'));
 		}

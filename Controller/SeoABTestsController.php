@@ -6,12 +6,12 @@ class SeoABTestsController extends SeoAppController {
 		'order' => 'SeoABTest.created DESC'
 	);
 	
-	function beforeFilter(){
+	public function beforeFilter(){
 		parent::beforeFilter();
 		$this->set('slots', $this->SeoABTest->slots);
 	}
 	
-	function admin_index($filter = null) {
+	public function admin_index($filter = null) {
 		if(!empty($this->data)){
 			$filter = $this->data['SeoABTest']['filter'];
 		}
@@ -20,7 +20,7 @@ class SeoABTestsController extends SeoAppController {
 		$this->set('filter', $filter);
 	}
 	
-	function admin_view($id = null) {
+	public function admin_view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid seo AB Test'));
 			$this->redirect(array('action' => 'index'));
@@ -29,7 +29,7 @@ class SeoABTestsController extends SeoAppController {
 		$this->set('id', $id);
 	}
 
-	function admin_add() {
+	public function admin_add() {
 		if (!empty($this->data)) {
 			$this->SeoABTest->clear();
 			if ($this->SeoABTest->save($this->data)) {
@@ -41,7 +41,7 @@ class SeoABTestsController extends SeoAppController {
 		}
 	}
 
-	function admin_edit($id = null) {
+	public function admin_edit($id = null) {
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid seo AB Test'));
 			$this->redirect(array('action' => 'index'));
@@ -60,7 +60,7 @@ class SeoABTestsController extends SeoAppController {
 		$this->set('id', $id);
 	}
 
-	function admin_delete($id = null) {
+	public function admin_delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for seo AB Test'));
 			$this->redirect(array('action'=>'index'));

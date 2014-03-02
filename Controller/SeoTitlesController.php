@@ -2,14 +2,14 @@
 App::uses('SeoAppController', 'Seo.Controller');
 class SeoTitlesController extends SeoAppController {
 	
-	function admin_index() {
+	public function admin_index() {
         $this->Prg->commonProcess($this->model->alias, array('action' => 'index'));
         $this->Paginator->settings['conditions']
             = $this->SeoTitle->parseCriteria($this->passedArgs);
         $this->set('seoTitles', $this->Paginator->paginate($this->model->alias));
 	}
 
-	function admin_view($id = null) {
+	public function admin_view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid seo title'));
 			$this->redirect(array('action' => 'index'));
@@ -17,7 +17,7 @@ class SeoTitlesController extends SeoAppController {
 		$this->set('seoTitle', $this->SeoTitle->read(null, $id));
 	}
 
-	function admin_add() {
+	public function admin_add() {
 		if (!empty($this->request->data)) {
 			$this->SeoTitle->clear();
 			if ($this->SeoTitle->save($this->request->data)) {
@@ -31,7 +31,7 @@ class SeoTitlesController extends SeoAppController {
 		$this->set(compact('seoUris'));
 	}
 
-	function admin_edit($id = null) {
+	public function admin_edit($id = null) {
 		if (!$id && empty($this->request->data)) {
 			$this->Session->setFlash(__('Invalid seo title'));
 			$this->redirect(array('action' => 'index'));
@@ -51,7 +51,7 @@ class SeoTitlesController extends SeoAppController {
 		$this->set(compact('seoUris'));
 	}
 
-	function admin_delete($id = null) {
+	public function admin_delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for seo title'));
 			$this->redirect(array('action'=>'index'));

@@ -2,7 +2,7 @@
 App::uses('SeoAppController', 'Seo.Controller');
 class SeoUrlsController extends SeoAppController {
 	
-	function admin_index($filter = null) {
+	public function admin_index($filter = null) {
 		if(!empty($this->request->data)){
 			$filter = $this->request->data['SeoUrl']['filter'];
 		}
@@ -11,7 +11,7 @@ class SeoUrlsController extends SeoAppController {
 		$this->set('filter', $filter);
 	}
 
-	function admin_view($id = null) {
+	public function admin_view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid seo url'));
 			$this->redirect(array('action' => 'index'));
@@ -20,7 +20,7 @@ class SeoUrlsController extends SeoAppController {
 		$this->set('id', $id);
 	}
 
-	function admin_add() {
+	public function admin_add() {
 		if (!empty($this->request->data)) {
 			$this->SeoUrl->clear();
 			if ($this->SeoUrl->saveAll($this->request->data)) {
@@ -32,7 +32,7 @@ class SeoUrlsController extends SeoAppController {
 		}
 	}
 
-	function admin_edit($id = null) {
+	public function admin_edit($id = null) {
 		if (!$id && empty($this->request->data)) {
 			$this->Session->setFlash(__('Invalid seo url'));
 			$this->redirect(array('action' => 'index'));
@@ -52,7 +52,7 @@ class SeoUrlsController extends SeoAppController {
 		$this->set('id', $id);
 	}
 
-	function admin_delete($id = null) {
+	public function admin_delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for seo url'));
 			$this->redirect(array('action'=>'index'));
@@ -65,7 +65,7 @@ class SeoUrlsController extends SeoAppController {
 		$this->redirect(array('action' => 'index'));
 	}
 	
-	function admin_approve($id = null){
+	public function admin_approve($id = null){
 	  if(!$id) {
 			$this->Session->setFlash(__('Invalid id for seo url'));
 		}

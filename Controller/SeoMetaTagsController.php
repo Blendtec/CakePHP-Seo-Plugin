@@ -2,14 +2,14 @@
 App::uses('SeoAppController', 'Seo.Controller');
 class SeoMetaTagsController extends SeoAppController {
 	
-	function admin_index() {
+	public function admin_index() {
         $this->Prg->commonProcess($this->model->alias, array('action' => 'index'));
         $this->Paginator->settings['conditions']
             = $this->SeoMetaTag->parseCriteria($this->passedArgs);
         $this->set('seoMetaTags', $this->Paginator->paginate($this->model->alias));
 	}
 	
-	function admin_view($id = null) {
+	public function admin_view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid seo meta tag'));
 			$this->redirect(array('action' => 'index'));
@@ -18,7 +18,7 @@ class SeoMetaTagsController extends SeoAppController {
 		$this->set('id', $id);
 	}
 
-	function admin_add() {
+	public function admin_add() {
 		if (!empty($this->request->data)) {
 			$this->SeoMetaTag->clear();
 			if ($this->SeoMetaTag->save($this->request->data)) {
@@ -30,7 +30,7 @@ class SeoMetaTagsController extends SeoAppController {
 		}
 	}
 
-	function admin_edit($id = null) {
+	public function admin_edit($id = null) {
 		if (!$id && empty($this->request->data)) {
 			$this->Session->setFlash(__('Invalid seo meta tag'));
 			$this->redirect(array('action' => 'index'));
@@ -49,7 +49,7 @@ class SeoMetaTagsController extends SeoAppController {
 		$this->set('id', $id);
 	}
 
-	function admin_delete($id = null) {
+	public function admin_delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for seo meta tag'));
 			$this->redirect(array('action'=>'index'));

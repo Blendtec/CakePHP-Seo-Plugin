@@ -2,14 +2,14 @@
 App::uses('SeoAppController', 'Seo.Controller');
 class SeoCanonicalsController extends SeoAppController {
 
-	function admin_index() {
+	public function admin_index() {
         $this->Prg->commonProcess($this->model->alias, array('action' => 'index'));
         $this->Paginator->settings['conditions']
             = $this->SeoCanonical->parseCriteria($this->passedArgs);
         $this->set('seoCanonicals', $this->Paginator->paginate($this->model->alias));
 	}
 
-	function admin_view($id = null) {
+	public function admin_view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid seo canonical'));
 			$this->redirect(array('action' => 'index'));
@@ -17,7 +17,7 @@ class SeoCanonicalsController extends SeoAppController {
 		$this->set('seoCanonical', $this->SeoCanonical->read(null, $id));
 	}
 
-	function admin_add() {
+	public function admin_add() {
 		if (!empty($this->request->data)) {
 			$this->SeoCanonical->clear();
 			if ($this->SeoCanonical->save($this->request->data)) {
@@ -29,7 +29,7 @@ class SeoCanonicalsController extends SeoAppController {
 		}
 	}
 
-	function admin_edit($id = null) {
+	public function admin_edit($id = null) {
 		if (!$id && empty($this->request->data)) {
 			$this->Session->setFlash(__('Invalid seo canonical'));
 			$this->redirect(array('action' => 'index'));
@@ -47,7 +47,7 @@ class SeoCanonicalsController extends SeoAppController {
 		}
 	}
 
-	function admin_delete($id = null) {
+	public function admin_delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for seo canonical'));
 			$this->redirect(array('action'=>'index'));
