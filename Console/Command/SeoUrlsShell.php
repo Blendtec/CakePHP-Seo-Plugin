@@ -1,5 +1,5 @@
 <?php
-class SeoUrlsShell extends Shell {
+class SeoUrlsShell extends AppShell {
 	var $uses = array('Seo.SeoUrl');
 	
 	function main(){
