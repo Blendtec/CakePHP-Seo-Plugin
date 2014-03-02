@@ -2,15 +2,14 @@
 App::uses('SeoAppController', 'Seo.Controller');
 class SeoStatusCodesController extends SeoAppController {
 
-	public function admin_index($filter = null) {
-		if(!empty($this->request->data)){
-			$filter = $this->request->data['SeoStatusCode']['filter'];
-		}
-		$conditions = $this->SeoStatusCode->generateFilterConditions($filter);
-		$this->set('seoStatusCodes',$this->Paginator->paginate($conditions));
-		$this->set('filter', $filter);
+	public function admin_index() {
+		$this->Prg->commonProcess(null, array('action' => 'index'));
+		$this->Paginator->settings['conditions']
+			= $this->SeoStatusCode->parseCriteria($this->passedArgs);
+		$this->set('status_codes', $this->SeoStatusCode->findCodeList());
+		$this->set('seoStatusCodes', $this->Paginator->paginate($this->SeoStatusCode->alias));
 	}
-	
+
 	public function admin_view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid seo status code'));

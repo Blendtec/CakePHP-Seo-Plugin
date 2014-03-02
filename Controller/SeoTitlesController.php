@@ -1,12 +1,12 @@
 <?php
 App::uses('SeoAppController', 'Seo.Controller');
 class SeoTitlesController extends SeoAppController {
-	
+
 	public function admin_index() {
-        $this->Prg->commonProcess($this->model->alias, array('action' => 'index'));
-        $this->Paginator->settings['conditions']
-            = $this->SeoTitle->parseCriteria($this->passedArgs);
-        $this->set('seoTitles', $this->Paginator->paginate($this->model->alias));
+		$this->Prg->commonProcess($this->SeoTitle->alias, array('action' => 'index'));
+		$this->Paginator->settings['conditions']
+			= $this->SeoTitle->parseCriteria($this->passedArgs);
+		$this->set('seoTitles', $this->Paginator->paginate($this->SeoTitle->alias));
 	}
 
 	public function admin_view($id = null) {
@@ -54,11 +54,11 @@ class SeoTitlesController extends SeoAppController {
 	public function admin_delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for seo title'));
-			$this->redirect(array('action'=>'index'));
+			$this->redirect(array('action' => 'index'));
 		}
 		if ($this->SeoTitle->delete($id)) {
 			$this->Session->setFlash(__('Seo title deleted'));
-			$this->redirect(array('action'=>'index'));
+			$this->redirect(array('action' => 'index'));
 		}
 		$this->Session->setFlash(__('Seo title was not deleted'));
 		$this->redirect(array('action' => 'index'));

@@ -5,19 +5,17 @@ class SeoABTestsController extends SeoAppController {
 	public $paginate = array(
 		'order' => 'SeoABTest.created DESC'
 	);
-	
-	public function beforeFilter(){
+
+	public function beforeFilter() {
 		parent::beforeFilter();
 		$this->set('slots', $this->SeoABTest->slots);
 	}
 	
-	public function admin_index($filter = null) {
-		if(!empty($this->data)){
-			$filter = $this->data['SeoABTest']['filter'];
-		}
-		$conditions = $this->SeoABTest->generateFilterConditions($filter);
-		$this->set('seoABTests',$this->Paginator->paginate($conditions));
-		$this->set('filter', $filter);
+	public function admin_index() {
+		$this->Prg->commonProcess(null, array('action' => 'index'));
+		$this->Paginator->settings['conditions']
+			= $this->SeoABTest->parseCriteria($this->passedArgs);
+		$this->set('seoABTests', $this->Paginator->paginate($this->SeoABTest->alias));
 	}
 	
 	public function admin_view($id = null) {

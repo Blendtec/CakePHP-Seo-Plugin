@@ -1,16 +1,14 @@
 <?php
 App::uses('SeoAppController', 'Seo.Controller');
 class SeoRedirectsController extends SeoAppController {
-	
-	public function admin_index($filter = null) {
-		if(!empty($this->request->data)){
-			$filter = $this->request->data['SeoRedirect']['filter'];
-		}
-		$conditions = $this->SeoRedirect->generateFilterConditions($filter);
-		$this->set('seoRedirects',$this->Paginator->paginate($conditions));
-		$this->set('filter', $filter);
+
+	public function admin_index() {
+		$this->Prg->commonProcess(null, array('action' => 'index'));
+		$this->Paginator->settings['conditions']
+			= $this->SeoRedirect->parseCriteria($this->passedArgs);
+		$this->set('seoRedirects', $this->Paginator->paginate($this->SeoRedirect->alias));
 	}
-	
+
 	public function admin_view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid seo redirect'));
@@ -54,11 +52,11 @@ class SeoRedirectsController extends SeoAppController {
 	public function admin_delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for seo redirect'));
-			$this->redirect(array('action'=>'index'));
+			$this->redirect(array('action' => 'index'));
 		}
 		if ($this->SeoRedirect->delete($id)) {
 			$this->Session->setFlash(__('Seo redirect deleted'));
-			$this->redirect(array('action'=>'index'));
+			$this->redirect(array('action' => 'index'));
 		}
 		$this->Session->setFlash(__('Seo redirect was not deleted'));
 		$this->redirect(array('action' => 'index'));

@@ -1,14 +1,12 @@
 <?php
 App::uses('SeoAppController', 'Seo.Controller');
 class SeoUrlsController extends SeoAppController {
-	
-	public function admin_index($filter = null) {
-		if(!empty($this->request->data)){
-			$filter = $this->request->data['SeoUrl']['filter'];
-		}
-		$conditions = $this->SeoUrl->generateFilterConditions($filter);
-		$this->set('seoUrls',$this->Paginator->paginate($conditions));
-		$this->set('filter', $filter);
+
+	public function admin_index() {
+		$this->Prg->commonProcess(null, array('action' => 'index'));
+		$this->Paginator->settings['conditions']
+			= $this->SeoUrl->parseCriteria($this->passedArgs);
+		$this->set('seoUrls', $this->Paginator->paginate($this->SeoUrl->alias));
 	}
 
 	public function admin_view($id = null) {
@@ -16,7 +14,7 @@ class SeoUrlsController extends SeoAppController {
 			$this->Session->setFlash(__('Invalid seo url'));
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->set('seoUri', $this->SeoUrl->findById($id));
+		$this->set('seoUrl', $this->SeoUrl->findById($id));
 		$this->set('id', $id);
 	}
 
@@ -46,30 +44,28 @@ class SeoUrlsController extends SeoAppController {
 			}
 		}
 		if (empty($this->request->data)) {
-			$this->request->data = $this->SeoUrl->findForViewById($id);
+			$this->request->data = $this->SeoUrl->findById($id);
 		}
-		$this->set('status_codes', $this->SeoUrl->SeoStatusCode->findCodeList());
 		$this->set('id', $id);
 	}
 
 	public function admin_delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for seo url'));
-			$this->redirect(array('action'=>'index'));
+			$this->redirect(array('action' => 'index'));
 		}
 		if ($this->SeoUrl->delete($id)) {
 			$this->Session->setFlash(__('Seo url deleted'));
-			$this->redirect(array('action'=>'index'));
+			$this->redirect(array('action' => 'index'));
 		}
 		$this->Session->setFlash(__('Seo url was not deleted'));
 		$this->redirect(array('action' => 'index'));
 	}
-	
-	public function admin_approve($id = null){
-	  if(!$id) {
+
+	public function admin_approve($id = null) {
+		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for seo url'));
-		}
-		elseif($this->SeoUrl->setApproved($id)) {
+		} elseif ($this->SeoUrl->setApproved($id)) {
 			$this->Session->setFlash(__('Seo Uri approved'));
 		}
 		$this->redirect(array('admin' => true, 'action' => 'index'));

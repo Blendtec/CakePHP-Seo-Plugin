@@ -3,10 +3,10 @@ App::uses('SeoAppController', 'Seo.Controller');
 class SeoCanonicalsController extends SeoAppController {
 
 	public function admin_index() {
-        $this->Prg->commonProcess($this->model->alias, array('action' => 'index'));
-        $this->Paginator->settings['conditions']
-            = $this->SeoCanonical->parseCriteria($this->passedArgs);
-        $this->set('seoCanonicals', $this->Paginator->paginate($this->model->alias));
+		$this->Prg->commonProcess($this->SeoCanonical->alias, array('action' => 'index'));
+		$this->Paginator->settings['conditions']
+			= $this->SeoCanonical->parseCriteria($this->passedArgs);
+		$this->set('seoCanonicals', $this->Paginator->paginate($this->SeoCanonical->alias));
 	}
 
 	public function admin_view($id = null) {
@@ -50,11 +50,11 @@ class SeoCanonicalsController extends SeoAppController {
 	public function admin_delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for seo canonical'));
-			$this->redirect(array('action'=>'index'));
+			$this->redirect(array('action' => 'index'));
 		}
 		if ($this->SeoCanonical->delete($id)) {
 			$this->Session->setFlash(__('Seo canonical deleted'));
-			$this->redirect(array('action'=>'index'));
+			$this->redirect(array('action' => 'index'));
 		}
 		$this->Session->setFlash(__('Seo canonical was not deleted'));
 		$this->redirect(array('action' => 'index'));

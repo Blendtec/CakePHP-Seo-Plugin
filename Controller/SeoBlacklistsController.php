@@ -1,31 +1,32 @@
 <?php
 App::uses('SeoAppController', 'Seo.Controller');
 class SeoBlacklistsController extends SeoAppController {
-	
-	public function beforeFilter(){
+
+	public function beforeFilter() {
 		parent::beforeFilter();
-		if(isset($this->Auth)){
+		if (isset($this->Auth)) {
 			$this->Auth->allow('banned');
 		}
 	}
-	
-	/**
-	* Banned action
-	*/
-	public function banned(){
+
+/**
+ * Banned action
+ */
+	public function banned() {
 		$this->layout = 'banned';
 	}
 
-	/**
-	* Admin actions
-	*/
-	public function admin_index($filter = null) {
-		if(!empty($this->data)){
-			$filter = $this->request->data['Location']['filter'];
-		}
-		$conditions = $this->SeoBlacklist->generateFilterConditions($filter);
-		$this->set('seoBlacklists',$this->Paginator->paginate($conditions));
-		$this->set('filter', $filter);
+/**
+ * Admin actions
+ */
+	public function admin_index() {
+		$this->Prg->commonProcess(null, array('action' => 'index'));
+		//@TODO this may not be necessary.
+		$this->passedArgs['ip']
+			= str_pad(str_replace('.', '', $this->passedArgs['ip']), 12, "0", STR_PAD_RIGHT);
+		$this->Paginator->settings['conditions']
+			= $this->SeoBlacklist->parseCriteria($this->passedArgs);
+		$this->set('seoBlacklists', $this->Paginator->paginate($this->SeoBlacklist->alias));
 	}
 
 	public function admin_view($id = null) {
@@ -69,14 +70,13 @@ class SeoBlacklistsController extends SeoAppController {
 	public function admin_delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for seo blacklist'));
-			$this->redirect(array('action'=>'index'));
+			$this->redirect(array('action' => 'index'));
 		}
 		if ($this->SeoBlacklist->delete($id)) {
 			$this->Session->setFlash(__('Seo blacklist deleted'));
-			$this->redirect(array('action'=>'index'));
+			$this->redirect(array('action' => 'index'));
 		}
 		$this->Session->setFlash(__('Seo blacklist was not deleted'));
 		$this->redirect(array('action' => 'index'));
 	}
 }
-?>

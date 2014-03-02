@@ -1,14 +1,14 @@
 <?php
 App::uses('SeoAppController', 'Seo.Controller');
 class SeoMetaTagsController extends SeoAppController {
-	
+
 	public function admin_index() {
-        $this->Prg->commonProcess($this->model->alias, array('action' => 'index'));
-        $this->Paginator->settings['conditions']
-            = $this->SeoMetaTag->parseCriteria($this->passedArgs);
-        $this->set('seoMetaTags', $this->Paginator->paginate($this->model->alias));
+		$this->Prg->commonProcess($this->SeoMetaTag->alias, array('action' => 'index'));
+		$this->Paginator->settings['conditions']
+			= $this->SeoMetaTag->parseCriteria($this->passedArgs);
+		$this->set('seoMetaTags', $this->Paginator->paginate($this->SeoMetaTag->alias));
 	}
-	
+
 	public function admin_view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid seo meta tag'));
@@ -52,14 +52,13 @@ class SeoMetaTagsController extends SeoAppController {
 	public function admin_delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for seo meta tag'));
-			$this->redirect(array('action'=>'index'));
+			$this->redirect(array('action' => 'index'));
 		}
 		if ($this->SeoMetaTag->delete($id)) {
 			$this->Session->setFlash(__('Seo meta tag deleted'));
-			$this->redirect(array('action'=>'index'));
+			$this->redirect(array('action' => 'index'));
 		}
 		$this->Session->setFlash(__('Seo meta tag was not deleted'));
 		$this->redirect(array('action' => 'index'));
 	}
 }
-?>
