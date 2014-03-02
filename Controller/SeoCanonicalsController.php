@@ -1,7 +1,6 @@
 <?php
+App::uses('SeoAppController', 'Seo.Controller');
 class SeoCanonicalsController extends SeoAppController {
-
-	var $name = 'SeoCanonicals';
 
 	function admin_index() {
         $this->Prg->commonProcess($this->model->alias, array('action' => 'index'));
@@ -19,9 +18,9 @@ class SeoCanonicalsController extends SeoAppController {
 	}
 
 	function admin_add() {
-		if (!empty($this->data)) {
+		if (!empty($this->request->data)) {
 			$this->SeoCanonical->clear();
-			if ($this->SeoCanonical->save($this->data)) {
+			if ($this->SeoCanonical->save($this->request->data)) {
 				$this->Session->setFlash(__('The seo canonical has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {
@@ -31,20 +30,20 @@ class SeoCanonicalsController extends SeoAppController {
 	}
 
 	function admin_edit($id = null) {
-		if (!$id && empty($this->data)) {
+		if (!$id && empty($this->request->data)) {
 			$this->Session->setFlash(__('Invalid seo canonical'));
 			$this->redirect(array('action' => 'index'));
 		}
-		if (!empty($this->data)) {
-			if ($this->SeoCanonical->save($this->data)) {
+		if (!empty($this->request->data)) {
+			if ($this->SeoCanonical->save($this->request->data)) {
 				$this->Session->setFlash(__('The seo canonical has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The seo canonical could not be saved. Please, try again.'));
 			}
 		}
-		if (empty($this->data)) {
-			$this->data = $this->SeoCanonical->read(null, $id);
+		if (empty($this->request->data)) {
+			$this->request->data = $this->SeoCanonical->read(null, $id);
 		}
 	}
 

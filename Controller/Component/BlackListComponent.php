@@ -5,27 +5,27 @@ class BlackListComponent extends Component {
 	/**
 	* CakePHP based URL to redirect the banned uesr
 	*/
-	var $redirect = array('admin' => false, 'plugin' => 'seo', 'controller' => 'seo_blacklists', 'action' => 'banned');
+	public $redirect = array('admin' => false, 'plugin' => 'seo', 'controller' => 'seo_blacklists', 'action' => 'banned');
 	
 	/**
 	* CakePHP based URL to the honeypot action setup in config
 	*/
-	var $honeyPot = null;
+	public $honeyPot = null;
 	
 	/**
 	* Error log
 	*/
-	var $errors = array();
+	public $errors = array();
 	
 	/**
 	* Placeholder for the SeoBlacklist Model
 	*/
-	var $SeoBlacklist = null;
+	public $SeoBlacklist = null;
 	
 	/**
 	* Placeholder for the SeoHoneypotVisit Model
 	*/
-	var $SeoHoneypotVisit = null;
+	public $SeoHoneypotVisit = null;
 	
 	/**
 	* Initialize the component, set the settings

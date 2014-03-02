@@ -1,14 +1,13 @@
 <?php
+App::uses('SeoAppController', 'Seo.Controller');
 class SeoRedirectsController extends SeoAppController {
-
-	var $name = 'SeoRedirects';
 	
 	function admin_index($filter = null) {
-		if(!empty($this->data)){
-			$filter = $this->data['SeoRedirect']['filter'];
+		if(!empty($this->request->data)){
+			$filter = $this->request->data['SeoRedirect']['filter'];
 		}
 		$conditions = $this->SeoRedirect->generateFilterConditions($filter);
-		$this->set('seoRedirects',$this->paginate($conditions));
+		$this->set('seoRedirects',$this->Paginator->paginate($conditions));
 		$this->set('filter', $filter);
 	}
 	
@@ -22,9 +21,9 @@ class SeoRedirectsController extends SeoAppController {
 	}
 
 	function admin_add() {
-		if (!empty($this->data)) {
+		if (!empty($this->request->data)) {
 			$this->SeoRedirect->clear();
-			if ($this->SeoRedirect->save($this->data)) {
+			if ($this->SeoRedirect->save($this->request->data)) {
 				$this->Session->setFlash(__('The seo redirect has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {
@@ -34,20 +33,20 @@ class SeoRedirectsController extends SeoAppController {
 	}
 
 	function admin_edit($id = null) {
-		if (!$id && empty($this->data)) {
+		if (!$id && empty($this->request->data)) {
 			$this->Session->setFlash(__('Invalid seo redirect'));
 			$this->redirect(array('action' => 'index'));
 		}
-		if (!empty($this->data)) {
-			if ($this->SeoRedirect->save($this->data)) {
+		if (!empty($this->request->data)) {
+			if ($this->SeoRedirect->save($this->request->data)) {
 				$this->Session->setFlash(__('The seo redirect has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The seo redirect could not be saved. Please, try again.'));
 			}
 		}
-		if (empty($this->data)) {
-			$this->data = $this->SeoRedirect->read(null, $id);
+		if (empty($this->request->data)) {
+			$this->request->data = $this->SeoRedirect->read(null, $id);
 		}
 		$this->set('id', $id);
 	}

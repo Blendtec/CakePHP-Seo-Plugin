@@ -1,8 +1,6 @@
 <?php
+App::uses('SeoAppController', 'Seo.Controller');
 class SeoUrisController extends SeoAppController {
-
-	var $name = 'SeoUris';
-	var $uses = array('Seo.SeoUri');
 	
 	private function clearAssociatesIfEmpty(){
 		foreach($this->request->data['SeoMetaTag'] as $key => $metatag){
@@ -22,7 +20,7 @@ class SeoUrisController extends SeoAppController {
         $this->Prg->commonProcess(null, array('action' => 'index'));
         $this->Paginator->settings['conditions']
             = $this->SeoUri->parseCriteria($this->passedArgs);
-        $this->set('seoUris', $this->Paginator->paginate($this->model->alias));
+        $this->set('seoUris', $this->Paginator->paginate($this->SeoUri->alias));
 	}
 	
 	function admin_urlencode($id = null){

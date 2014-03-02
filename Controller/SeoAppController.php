@@ -2,7 +2,7 @@
 App::uses('SeoUtil', 'Seo.Lib');
 App::uses('AppController','Controller');
 class SeoAppController extends AppController {
-    var $helpers = array('Time');
+    public $helpers = array('Time');
     var $components = array(
         'Paginator',
         'Security',

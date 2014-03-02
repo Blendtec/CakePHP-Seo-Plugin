@@ -1,7 +1,6 @@
 <?php
+App::uses('SeoAppController', 'Seo.Controller');
 class SeoMetaTagsController extends SeoAppController {
-
-	var $name = 'SeoMetaTags';
 	
 	function admin_index() {
         $this->Prg->commonProcess($this->model->alias, array('action' => 'index'));
@@ -20,9 +19,9 @@ class SeoMetaTagsController extends SeoAppController {
 	}
 
 	function admin_add() {
-		if (!empty($this->data)) {
+		if (!empty($this->request->data)) {
 			$this->SeoMetaTag->clear();
-			if ($this->SeoMetaTag->save($this->data)) {
+			if ($this->SeoMetaTag->save($this->request->data)) {
 				$this->Session->setFlash(__('The seo meta tag has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {
@@ -32,20 +31,20 @@ class SeoMetaTagsController extends SeoAppController {
 	}
 
 	function admin_edit($id = null) {
-		if (!$id && empty($this->data)) {
+		if (!$id && empty($this->request->data)) {
 			$this->Session->setFlash(__('Invalid seo meta tag'));
 			$this->redirect(array('action' => 'index'));
 		}
-		if (!empty($this->data)) {
-			if ($this->SeoMetaTag->save($this->data)) {
+		if (!empty($this->request->data)) {
+			if ($this->SeoMetaTag->save($this->request->data)) {
 				$this->Session->setFlash(__('The seo meta tag has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The seo meta tag could not be saved. Please, try again.'));
 			}
 		}
-		if (empty($this->data)) {
-			$this->data = $this->SeoMetaTag->read(null, $id);
+		if (empty($this->request->data)) {
+			$this->request->data = $this->SeoMetaTag->read(null, $id);
 		}
 		$this->set('id', $id);
 	}

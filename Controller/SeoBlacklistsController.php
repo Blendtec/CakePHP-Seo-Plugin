@@ -1,7 +1,6 @@
 <?php
+App::uses('SeoAppController', 'Seo.Controller');
 class SeoBlacklistsController extends SeoAppController {
-
-	var $name = 'SeoBlacklists';
 	
 	function beforeFilter(){
 		parent::beforeFilter();
@@ -22,10 +21,10 @@ class SeoBlacklistsController extends SeoAppController {
 	*/
 	function admin_index($filter = null) {
 		if(!empty($this->data)){
-			$filter = $this->data['Location']['filter'];
+			$filter = $this->request->data['Location']['filter'];
 		}
 		$conditions = $this->SeoBlacklist->generateFilterConditions($filter);
-		$this->set('seoBlacklists',$this->paginate($conditions));
+		$this->set('seoBlacklists',$this->Paginator->paginate($conditions));
 		$this->set('filter', $filter);
 	}
 
@@ -38,9 +37,9 @@ class SeoBlacklistsController extends SeoAppController {
 	}
 
 	function admin_add() {
-		if (!empty($this->data)) {
+		if (!empty($this->request->data)) {
 			$this->SeoBlacklist->clear();
-			if ($this->SeoBlacklist->save($this->data)) {
+			if ($this->SeoBlacklist->save($this->request->data)) {
 				$this->Session->setFlash(__('The seo blacklist has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {
@@ -50,20 +49,20 @@ class SeoBlacklistsController extends SeoAppController {
 	}
 
 	function admin_edit($id = null) {
-		if (!$id && empty($this->data)) {
+		if (!$id && empty($this->request->data)) {
 			$this->Session->setFlash(__('Invalid seo blacklist'));
 			$this->redirect(array('action' => 'index'));
 		}
-		if (!empty($this->data)) {
-			if ($this->SeoBlacklist->save($this->data)) {
+		if (!empty($this->request->data)) {
+			if ($this->SeoBlacklist->save($this->request->data)) {
 				$this->Session->setFlash(__('The seo blacklist has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The seo blacklist could not be saved. Please, try again.'));
 			}
 		}
-		if (empty($this->data)) {
-			$this->data = $this->SeoBlacklist->read(null, $id);
+		if (empty($this->request->data)) {
+			$this->request->data = $this->SeoBlacklist->read(null, $id);
 		}
 	}
 

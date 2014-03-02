@@ -2,7 +2,6 @@
 App::uses('SeoAppController','Seo.Controller');
 class SeoABTestsController extends SeoAppController {
 
-	var $name = 'SeoABTests';
 	public $paginate = array(
 		'order' => 'SeoABTest.created DESC'
 	);
@@ -17,7 +16,7 @@ class SeoABTestsController extends SeoAppController {
 			$filter = $this->data['SeoABTest']['filter'];
 		}
 		$conditions = $this->SeoABTest->generateFilterConditions($filter);
-		$this->set('seoABTests',$this->Paginator($conditions));
+		$this->set('seoABTests',$this->Paginator->paginate($conditions));
 		$this->set('filter', $filter);
 	}
 	
