@@ -1,13 +1,16 @@
 <?php
 class SeoStatusCode extends SeoAppModel {
-	var $name = 'SeoStatusCode';
-	var $displayField = 'seo_uri_id';
-	var $validate = array(
-		'seo_uri_id' => array(
-            'notempty' => array(
-                'rule' => array('notempty'),
-                'message' => 'Uri required',
-            ),
+
+	public $name = 'SeoStatusCode';
+
+	public $displayField = 'seo_uri_id';
+
+	public $validate = array(
+			'seo_uri_id' => array(
+				'notempty' => array(
+					'rule' => array('notempty'),
+					'message' => 'Uri required',
+			),
 		),
 		'status_code' => array(
 			'numeric' => array(
@@ -23,17 +26,28 @@ class SeoStatusCode extends SeoAppModel {
 		),
 	);
 
-	var $belongsTo = array(
+/**
+ * Default filter args for building search queries using the searchable behavior
+ *
+ * @public array
+ */
+	public $filterArgs = array (
+		'status_code' => array('type' => 'like'),
+		'uri' => array('type' => 'like', 'encode' => true, 'field' => array('SeoUri.uri')),
+		'is_active' => array('type' => 'value', 'empty' => false),
+	);
+
+	public $belongsTo = array(
 		'SeoUri' => array(
 			'className' => 'Seo.SeoUri',
 			'foreignKey' => 'seo_uri_id',
 		)
 	);
-	
-	/**
-	* Status codes
-	*/
-	var $codes = array(
+
+/**
+ * Status codes
+ */
+	public $codes = array(
 		'200' => 'OK', //if 200, we're going to return a very small amount of noindex data
 		'204' => 'No Content',
 		'205' => 'Reset Content',
@@ -56,37 +70,30 @@ class SeoStatusCode extends SeoAppModel {
 		'416' => 'Requested Range Not Satisfiable',
 		'417' => 'Expectation Failed',
 	);
-	
-	/**
-	* Filter fields
-	*/
-	var $searchFields = array(
-		'SeoStatusCode.status_code','SeoStatusCode.id','SeoUri.uri'
-	);
-	
-	/**
-	* Check if SEO already exists, if so, unset it and set the ID then save.
-	*/
-	function beforeSave($options = array()){
+
+/**
+ * Check if SEO already exists, if so, unset it and set the ID then save.
+ */
+	public function beforeSave($options = array()) {
 		$this->createOrSetUri();
 		return true;
 	}
-	
-	function findCodeList(){
+
+	public function findCodeList() {
 		$retval = array();
-		foreach($this->codes as $code => $text){
+		foreach ($this->codes as $code => $text) {
 			$retval[$code] = "$code : $text";
 		}
 		return $retval;
 	}
-	
-	/**
-	* Named scope to find list of uri -> status_codes and order by priority only approved/active
-	* @return list of active and approved uri => status_codes ordered by priority
-	*/
-	function findStatusCodeListByPriority(){
+
+/**
+ * Named scope to find list of uri -> status_codes and order by priority only approved/active
+ * @return list of active and approved uri => status_codes ordered by priority
+ */
+	public function findStatusCodeListByPriority() {
 		return $this->find('all', array(
-			'fields' => array("{$this->SeoUri->alias}.uri","{$this->alias}.status_code"),
+			'fields' => array("{$this->SeoUri->alias}.uri", "{$this->alias}.status_code"),
 			'order' => "{$this->alias}.priority ASC",
 			'conditions' => array(
 				"{$this->alias}.is_active" => true,

@@ -1,8 +1,11 @@
 <?php
 class SeoHoneypotVisit extends SeoAppModel {
-	var $name = 'SeoHoneypotVisit';
-	var $displayField = 'ip';
-	var $validate = array(
+
+	public $name = 'SeoHoneypotVisit';
+
+	public $displayField = 'ip';
+
+	public $validate = array(
 		'ip' => array(
 			'numeric' => array(
 				'rule' => array('isIp'),
@@ -10,25 +13,24 @@ class SeoHoneypotVisit extends SeoAppModel {
 			),
 		),
 	);
-	
-	
-	/**
-	* Fields to IP
-	*/
-	var $fieldsToLong = array(
+
+/**
+ * Fields to IP
+ */
+	public $fieldsToLong = array(
 		'ip'
 	);
-	
-	/**
-	* HoneyPot visit triggered, log the visit in the database.
-	* @param string ip
-	* @return boolean success
-	*/
-	function add($ip = null){
-		if(!$ip){
+
+/**
+ * HoneyPot visit triggered, log the visit in the database.
+ * @param string ip
+ * @return boolean success
+ */
+	public function add($ip = null) {
+		if (!$ip) {
 			$ip = $this->getIpFromServer();
 		}
-		
+
 		$this->clear();
 		return $this->save(array(
 			$this->alias => array(
@@ -36,41 +38,39 @@ class SeoHoneypotVisit extends SeoAppModel {
 			)
 		));
 	}
-	
-	/**
-	* Decide if the trap should be triggered
-	* @param string ip to check (default current IP)
-	* @return boolean
-	*/
-	function isTriggered($ip = null){
-		if(!$ip){
+
+/**
+ * Decide if the trap should be triggered
+ * @param string ip to check (default current IP)
+ * @return boolean
+ */
+	public function isTriggered($ip = null) {
+		if (!$ip) {
 			$ip = $this->getIpFromServer();
 		}
-		$ip_query = is_numeric($ip) ? $ip : ip2long($ip);
-		
+		$ipQuery = is_numeric($ip) ? $ip : ip2long($ip);
+
 		//Clear the database of old trigger count
 		$this->clear();
-		
+
 		//Find the count of triggers within the (not allowed) time frame
 		$count = $this->find('count', array(
 			'conditions' => array(
-				"{$this->alias}.ip" => $ip_query
+				"{$this->alias}.ip" => $ipQuery
 			)
 		));
-		
+
 		return (SeoUtil::getConfig('triggerCount') <= $count);
 	}
-	
-	/**
-	* Clear the list of old visits baesd on the current time.
-	* @return boolean success
-	*/
-	function clear(){
-		$cutoff =  time() - SeoUtil::getConfig('timeBetweenTriggers');
+
+/**
+ * Clear the list of old visits baesd on the current time.
+ * @return boolean success
+ */
+	public function clear() {
+		$cutoff = time() - SeoUtil::getConfig('timeBetweenTriggers');
 		return $this->deleteAll(array(
-			"{$this->alias}.created <=" => date('Y-m-d g:i:s', $cutoff) 
+			"{$this->alias}.created <=" => date('Y-m-d g:i:s', $cutoff)
 		));
 	}
-
 }
-?>

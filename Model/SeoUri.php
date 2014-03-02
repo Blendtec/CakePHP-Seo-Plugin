@@ -1,26 +1,26 @@
 <?php
-App::uses('SeoAppModel','Seo.Model');
+App::uses('SeoAppModel', 'Seo.Model');
 class SeoUri extends SeoAppModel {
 
-	/**
-	 * Model Name/Alias
-	 *
-	 * @var string
-	 */
+/**
+ * Model Name/Alias
+ *
+ * @var string
+ */
 	public $name = 'SeoUri';
 
-	/**
-	 * Model Display Field
-	 *
-	 * @var string
-	 */
+/**
+ * Model Display Field
+ *
+ * @var string
+ */
 	public $displayField = 'uri';
 
-	/**
-	 * Has Many Association
-	 *
-	 * @var array
-	 */
+/**
+ * Has Many Association
+ *
+ * @var array
+ */
 	public $hasMany = array(
 		'SeoMetaTag' => array(
 			'className' => 'Seo.SeoMetaTag',
@@ -34,11 +34,11 @@ class SeoUri extends SeoAppModel {
 		)
 	);
 
-	/**
-	 * Has One Association
-	 *
-	 * @var array
-	 */
+/**
+ *Has One Association
+ *
+ * @var array
+ */
 	public $hasOne = array(
 		'SeoRedirect' => array(
 			'className' => 'Seo.SeoRedirect',
@@ -62,13 +62,12 @@ class SeoUri extends SeoAppModel {
 		)
 	);
 
-
-	/**
-	 * Validation Rules
-	 *
-	 * @var array
-	 */
-	public $validate = array(
+/**
+ * Validation Rules
+ *
+ * @var array
+ */
+	public $validate = array (
 		'uri' => array(
 			'unique' => array(
 				'rule' => array('isUnique'),
@@ -81,22 +80,23 @@ class SeoUri extends SeoAppModel {
 		)
 	);
 
-    /**
-     * Default filter args for building search queries using the searchable behavior
-     *
-     * @var array
-     */
-    public $filterArgs = array (
-        'uri' => array('type' => 'like'),
-    );
+/**
+ * Default filter args for building search queries using the searchable behavior
+ *
+ * @var array
+ */
+	public $filterArgs = array (
+		'uri' => array('type' => 'like', 'encode' => true),
+		'is_approved' => array('type' => 'value', 'empty' => false),
+	);
 
-	/**
-	 * If saving a regular expression, make sure to mark not approved unless
-	 * is_approved is specifically being sent in.
-	 *
-	 * @param array $options
-	 * @return true
-	 */
+/**
+ * If saving a regular expression, make sure to mark not approved unless
+ * is_approved is specifically being sent in.
+ *
+ * @param array $options
+ * @return true
+ */
 	public function beforeSave($options = array()) {
 		//url encode the uri, but only once.
 		if (!empty($this->data[$this->alias]['uri']) && $this->isRegEx($this->data[$this->alias]['uri'])) {
@@ -109,12 +109,13 @@ class SeoUri extends SeoAppModel {
 		return parent::beforeSave($options);
 	}
 
-	/**
-	 * Send need approval email if we need it.
-	 *
-	 * @param boolean $created
-	 * @return boolean
-	 */
+/**
+ * Send need approval email if we need it.
+ *
+ * @param boolean $created
+ * @param array $options
+ * @return boolean
+ */
 	public function afterSave($created, $options = array()) {
 		if ($created) {
 			//Maybe URI
@@ -126,53 +127,53 @@ class SeoUri extends SeoAppModel {
 		return parent::afterSave($created, $options);
 	}
 
-	/**
-	 * Url encode the uri
-	 *
-	 * @param int id
-	 * @return boolean success
-	 */
+/**
+ * Url encode the uri
+ *
+ * @param int id
+ * @return boolean success
+ */
 	public function urlEncode($id = null) {
-		if($id) {
+		if ($id) {
 			$this->id = $id;
 		}
 		$uri = $this->field('uri');
 		$uri = rawurlencode($uri);
-		$uri = str_replace('%2F','/', $uri);
+		$uri = str_replace('%2F', '/', $uri);
 		return $this->saveField('uri', $uri);
 	}
 
-	/**
-	 * Named scope to find for view
-	 *
-	 * @param int id
-	 * @return result of find.
-	 */
+/**
+ * Named scope to find for view
+ *
+ * @param int id
+ * @return result of find.
+ */
 	public function findForViewById($id) {
 		return $this->find('first', array(
 			'conditions' => array('SeoUri.id' => $id),
-			'contain' => array('SeoRedirect','SeoTitle','SeoMetaTag','SeoStatusCode')
+			'contain' => array('SeoRedirect', 'SeoTitle', 'SeoMetaTag', 'SeoStatusCode')
 		));
 	}
 
-	/**
-	 * Find the URI id by uri
-	 *
-	 * @param string uri
-	 * @return mixed id
-	 */
+/**
+ * Find the URI id by uri
+ *
+ * @param string uri
+ * @return mixed id
+ */
 	public function findIdByUri($uri = null) {
 		return $this->field('id', array("{$this->alias}.uri" => $uri));
 	}
 
-	/**
-	* This is a simple function to return all possible RegEx URIs from the DB
-	* (it has to return all of them, since we can't know which it's going to match)
-	* So we've wrapped the DB request in a simple cache request,
-	*   configured by setting the config key cacheEngine
-	*
-	* @return array $uris array(id => uri)
-	*/
+/**
+ * This is a simple function to return all possible RegEx URIs from the DB
+ * (it has to return all of them, since we can't know which it's going to match)
+ * So we've wrapped the DB request in a simple cache request,
+ *   configured by setting the config key cacheEngine
+ *
+ * @return array $uris array(id => uri)
+ */
 	public function findAllRegexUris() {
 		$cacheEngine = SeoUtil::getConfig('cacheEngine');
 		if (!empty($cacheEngine)) {
@@ -189,7 +190,7 @@ class SeoUri extends SeoAppModel {
 					"{$this->alias}.is_approved" => true
 					),
 				'contain' => array(),
-				'fields' => array("{$this->alias}.id","{$this->alias}.uri")
+				'fields' => array("{$this->alias}.id", "{$this->alias}.uri")
 				));
 			if (!empty($uris) && !empty($cacheEngine)) {
 				Cache::write($cacheKey, $uris, $cacheEngine);
@@ -201,33 +202,33 @@ class SeoUri extends SeoAppModel {
 		return $uris;
 	}
 
-	/**
-	 * Checks an input $request against regex urls
-	 *
-	 * @param string $request
-	 * @return array $uri_ids array(id)
-	 */
+/**
+ * Checks an input $request against regex urls
+ *
+ * @param string $request
+ * @return array $uri_ids array(id)
+ */
 	public function findRegexUri($request = null) {
-		$uri_ids = array();
+		$uriIds = array();
 		$uris = $this->findAllRegexUris();
 		foreach ($uris as $uri) {
 			//Wildcard match
-			if (strpos($request, str_replace('*','', $uri[$this->alias]['uri'])) !== false) {
-				$uri_ids[] = $uri[$this->alias]['id'];
+			if (strpos($request, str_replace('*', '', $uri[$this->alias]['uri'])) !== false) {
+				$uriIds[] = $uri[$this->alias]['id'];
 			} elseif ($this->isRegex($uri[$this->alias]['uri']) && preg_match($uri[$this->alias]['uri'], $request)) {
 				//Regex match
-				$uri_ids[] = $uri[$this->alias]['id'];
+				$uriIds[] = $uri[$this->alias]['id'];
 			}
 		}
-		return $uri_ids;
+		return $uriIds;
 	}
 
-	/**
-	 * Set as approved
-	 *
-	 * @param int id of seo redirect to approve
-	 * @return boolean result of save
-	 */
+/**
+ * Set as approved
+ *
+ * @param int id of seo redirect to approve
+ * @return boolean result of save
+ */
 	public function setApproved($id = null) {
 		if ($id) {
 			$this->id = $id;
@@ -235,12 +236,12 @@ class SeoUri extends SeoAppModel {
 		return $this->saveField('is_approved', true);
 	}
 
-	/**
-	 * Send the notification of a regular expression that needs approval.
-	 *
-	 * @param int id
-	 * @return void
-	 */
+/**
+ * Send the notification of a regular expression that needs approval.
+ *
+ * @param int id
+ * @return void
+ */
 	public function sendNotification($id = null) {
 		if ($id) {
 			$this->id = $id;
@@ -248,7 +249,7 @@ class SeoUri extends SeoAppModel {
 		$this->read();
 		if (!empty($this->data)) {
 			if (!isset($this->Email)) {
-				App::import('Component','Email');
+				App::import('Component', 'Email');
 				$this->Email = new EmailComponent();
 			}
 			$this->Email->to = SeoUtil::getConfig('approverEmail');
@@ -262,19 +263,19 @@ class SeoUri extends SeoAppModel {
 				PRIORITY: {$this->data[$this->SeoRedirect->alias]['priority']}<br /><br />
 
 				Link to approve:<br />
-				". SeoUtil::getConfig('parentDomain') ."/admin/seo/seo_redirects/approve/{$this->data[$this->SeoRedirect->alias]['id']}<br /><br />
+				" . SeoUtil::getConfig('parentDomain') . "/admin/seo/seo_redirects/approve/{$this->data[$this->SeoRedirect->alias]['id']}<br /><br />
 				");
 		}
 	}
-	
-	/**
-	 * Given a request, see if the uri matches.
-	 * @param string request
-	 * @param mixed string uri or uri_id to look up
-	 * @return boolean if request matches the URI given
-	 */
-	public function requestMatch($request, $uri = null){
-		if(is_int($uri)){
+
+/**
+ * Given a request, see if the uri matches.
+ * @param string request
+ * @param mixed string uri or uri_id to look up
+ * @return boolean if request matches the URI given
+ */
+	public function requestMatch($request, $uri = null) {
+		if (is_int($uri)) {
 			$uri = $this->field('uri', array('SeoUri.id' => $uri));
 		}
 		return SeoUtil::requestMatch($request, $uri);

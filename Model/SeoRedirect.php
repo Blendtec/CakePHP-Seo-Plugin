@@ -1,8 +1,11 @@
 <?php
 class SeoRedirect extends SeoAppModel {
-	var $name = 'SeoRedirect';
-	var $displayField = 'uri';
-	var $validate = array(
+
+	public $name = 'SeoRedirect';
+
+	public $displayField = 'uri';
+
+	public $validate = array(
 		'redirect' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
@@ -16,41 +19,45 @@ class SeoRedirect extends SeoAppModel {
 			),
 		),
 	);
-	
-	var $belongsTo = array(
+
+/**
+ * Default filter args for building search queries using the searchable behavior
+ *
+ * @public array
+ */
+	public $filterArgs = array (
+		'redirect' => array('type' => 'like', 'encode' => true),
+		'uri' => array('type' => 'like', 'encode' => true, 'field' => array('SeoUri.uri')),
+		'is_active' => array('type' => 'value', 'empty' => false),
+	);
+
+	public $belongsTo = array(
 		'Seo.SeoUri'
 	);
-	
-	/**
-	* Filter fields
-	*/
-	var $searchFields = array(
-		'SeoRedirect.redirect','SeoRedirect.callback','SeoRedirect.id','SeoUri.uri'
-	);
-	
-	/**
-	* Check if SEO already exists, if so, unset it and set the ID then save.
-	*/
-	function beforeSave($options = array()){
+
+/**
+ * Check if SEO already exists, if so, unset it and set the ID then save.
+ */
+	public function beforeSave($options = array()) {
 		$this->createOrSetUri();
 		return true;
 	}
-	
-	/**
-	* This is a helper function for testing.
-	*/
-	function callbackTest($request){
+
+/**
+ * This is a helper function for testing.
+ */
+	public function callbackTest($request) {
 		$this->uri_request = $request;
 		return 'ran_callback';
 	}
-	
-	/**
-	* Named scope to find list of uri -> redirect by order and approved/active
-	* @return list of active and approved uri -> redirects ordered by priority
-	*/
-	function findRedirectListByPriority(){
+
+/**
+ * Named scope to find list of uri -> redirect by order and approved/active
+ * @return list of active and approved uri -> redirects ordered by priority
+ */
+	public function findRedirectListByPriority() {
 		return $this->find('all', array(
-			'fields' => array("{$this->SeoUri->alias}.uri","{$this->alias}.redirect","{$this->alias}.id","{$this->alias}.callback"),
+			'fields' => array("{$this->SeoUri->alias}.uri", "{$this->alias}.redirect", "{$this->alias}.id", "{$this->alias}.callback"),
 			'order' => "{$this->alias}.priority ASC",
 			'conditions' => array(
 				"{$this->alias}.is_active" => true,

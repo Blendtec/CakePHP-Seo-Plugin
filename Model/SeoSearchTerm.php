@@ -1,14 +1,17 @@
 <?php
 /**
-* Find search terms from google and save them to the database
-* @author Nick Baker
-* @version 6.0
-*/
+ * Find search terms from google and save them to the database
+ * @author Nick Baker
+ * @version 6.0
+ */
 App::uses('SeoUtil', 'Seo.Lib');
 class SeoSearchTerm extends SeoAppModel {
-	var $name = 'SeoSearchTerm';
-	var $displayField = 'term';
-	var $validate = array(
+
+	public $name = 'SeoSearchTerm';
+
+	public $displayField = 'term';
+
+	public $validate = array(
 		'term' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
@@ -25,35 +28,44 @@ class SeoSearchTerm extends SeoAppModel {
 			),
 		),
 	);
-	
-	/**
-	* Take the incomming request referrer and decide if we should save this term in our 
-	* database
-	* @param incoming request usually $this->here
-	* @return void
-	* @access public
-	*/
-	function parseRequest($request = null){
-		if($request){
+
+/**
+ * Default filter args for building search queries using the searchable behavior
+ *
+ * @public array
+ */
+	public $filterArgs = array (
+		'term' => array ('type' => 'like'),
+		'uri' => array('type' => 'like', 'field' => array('SeoUri.uri')),
+	);
+
+/**
+ * Take the incomming request referrer and decide if we should save this term in our
+ * database
+ * @param incoming request usually $this->here
+ * @return void
+ * @access public
+ */
+	public function parseRequest($request = null) {
+		if ($request) {
 			$referrer = env('HTTP_REFERER');
 			// Check if from google and page 2
-			if(strpos($referrer,"google.com")) {
-				if(!SeoUtil::getConfig('searchTerms')){
+			if (strpos($referrer, "google.com")) {
+				if (!SeoUtil::getConfig('searchTerms')) {
 					return;
 				}
 				//parse the term out.
-				if(strpos($referrer, "q=")){
+				if (strpos($referrer, "q=")) {
 					list($ignore, $term) = explode("q=", $referrer);
-					if(strpos($term, "&")){
+					if (strpos($term, "&")) {
 						list($term, $ignore) = explode("&", $term);
 					}
 					$term = trim(urldecode($term));
-					if($term && strpos($referrer,"start=")){
+					if ($term && strpos($referrer, "start=")) {
 						//Only proceed if we have a valid term
-						if($id = $this->field('id', array('SeoSearchTerm.term' => $term))){
+						if ($id = $this->field('id', array('SeoSearchTerm.term' => $term))) {
 							$this->itterateCount($id);
-						}
-						else {
+						} else {
 							$data = array(
 								'SeoSearchTerm' => array(
 									'term' => $term,
@@ -63,10 +75,9 @@ class SeoSearchTerm extends SeoAppModel {
 							);
 							$this->save($data);
 						}
-					}
-					elseif($term) {
+					} elseif ($term) {
 						//Delete the term if this was found on the first page.
-						if($id = $this->field('id', array('SeoSearchTerm.term' => $term))){
+						if ($id = $this->field('id', array('SeoSearchTerm.term' => $term))) {
 							$this->delete($id);
 						}
 					}
@@ -74,39 +85,42 @@ class SeoSearchTerm extends SeoAppModel {
 			}
 		}
 	}
-	
-	/**
-	* Pull out random terms
-	* @param int limit
-	* @param array set of results
-	*/
-	function findRandomTerms($limit = 6){
+
+/**
+ * Pull out random terms
+ * @param int limit
+ * @param array set of results
+ * @return array
+ */
+	public function findRandomTerms($limit = 6) {
 		return $this->find('all', array(
 			'limit' => $limit,
 			'order' => 'RAND()'
 		));
 	}
-	
-	/**
-	* Find the top terms
-	* @param int limit
-	* @return array set of results
-	*/
-	function findTopTerms($limit = 6){
+
+/**
+ * Find the top terms
+ * @param int limit
+ * @return array set of results
+ */
+	public function findTopTerms($limit = 6) {
 		return $this->find('all', array(
 			'limit' => $limit,
 			'order' => 'SeoSearchTerm.count DESC'
 		));
 	}
-	
-	/**
-	* Itterate the count on a specific term.
-	* @param int id (optional)
-	* @return boolean success
-	*/
-	function itterateCount($id = null){
-		if($id) $this->id = $id;
-		if($this->id){
+
+/**
+ * Itterate the count on a specific term.
+ * @param int id (optional)
+ * @return boolean success
+ */
+	public function itterateCount($id = null) {
+		if ($id) {
+			$this->id = $id;
+		}
+		if ($this->id) {
 			return $this->saveField('count', $this->field('count') + 1);
 		}
 		return false;

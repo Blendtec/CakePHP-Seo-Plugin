@@ -8,25 +8,25 @@
  */
 class SeoTitle extends SeoAppModel {
 
-	/**
-	 * Model Name/Alias
-	 *
-	 * @var string
-	 */
+/**
+ * Model Name/Alias
+ *
+ * @var string
+ */
 	public $name = 'SeoTitle';
 
-	/**
-	 * Display Field
-	 *
-	 * @var string
-	 */
+/**
+ * Display Field
+ *
+ * @var string
+ */
 	public $displayField = 'title';
 
-	/**
-	 * Validation Rules
-	 *
-	 * @var array
-	 */
+/**
+ * Validation Rules
+ *
+ * @var array
+ */
 	public $validate = array(
 		'seo_uri_id' => array(
 			'unique' => array(
@@ -42,11 +42,21 @@ class SeoTitle extends SeoAppModel {
 		),
 	);
 
-	/**
-	 * Belongs To Association
-	 *
-	 * @var array
-	 */
+/**
+ * Default filter args for building search queries using the searchable behavior
+ *
+ * @var array
+ */
+	public $filterArgs = array (
+		'title' => array ('type' => 'like'),
+		'uri' => array('type' => 'like', 'field' => array('SeoUri.uri')),
+	);
+
+/**
+ * Belongs To Association
+ *
+ * @var array
+ */
 	public $belongsTo = array(
 		'SeoUri' => array(
 			'className' => 'Seo.SeoUri',
@@ -54,32 +64,23 @@ class SeoTitle extends SeoAppModel {
 		)
 	);
 
-    /**
-     * Default filter args for building search queries using the searchable behavior
-     *
-     * @var array
-     */
-    public $filterArgs = array (
-        'title' => array ('type' => 'like'),
-        'uri' => array('type' => 'like', 'field' => array('SeoUri.uri')),
-    );
-
-	/**
-	* Assign or create the url.
-	*
-	* @return boolean
-	*/
+/**
+ * Assign or create the url.
+ *
+ * @param array $options
+ * @return boolean
+ */
 	public function beforeSave($options = array()) {
 		$this->createOrSetUri();
 		return parent::beforeSave($options);
 	}
 
-	/**
-	* Find the first title tag that matches this URI
-	*
-	* @param string incoming reuqest uri
-	* @return the first title tag to match
-	*/
+/**
+ * Find the first title tag that matches this URI
+ *
+ * @param string incoming reuqest uri
+ * @return the first title tag to match
+ */
 	public function findTitleByUri($request = null) {
 		return $this->find('first', array(
 			'conditions' => array(
