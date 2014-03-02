@@ -4,12 +4,7 @@
 	<?php echo $this->Form->create('SeoBlacklist');?>
 		<fieldset>
 			<legend><?php echo __('Admin Add Seo Blacklist'); ?></legend>
-		<?php
-			echo $this->Form->input('ip_range_start', array('type' => 'text'));
-			echo $this->Form->input('ip_range_end', array('type' => 'text'));
-			echo $this->Form->input('note');
-			echo $this->Form->input('is_active');
-		?>
+			<?php echo $this->element('SeoBlacklist/form');?>
 		</fieldset>
 	<?php echo $this->Form->end(__('Save BlackList'));?>
 	</div>

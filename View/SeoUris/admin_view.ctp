@@ -65,7 +65,15 @@
 		<?php endif; ?>
 		<div class="actions">
 			<ul>
-				<li><?php echo $this->Html->link(__('Edit Seo Redirect'), array('controller' => 'seo_redirects', 'action' => 'edit', $seoUri['SeoRedirect']['id'])); ?></li>
+				<li>
+					<?php
+					if (!is_null($seoUri['SeoRedirect']['id'])) {
+						echo $this->Html->link(__('Edit Seo Redirect'), array('controller' => 'seo_redirects', 'action' => 'edit', $seoUri['SeoRedirect']['id']));
+					} else {
+						echo $this->Html->link(__('Add Seo Redirect'), array('controller' => 'seo_redirects', 'action' => 'add', $seoUri['SeoUri']['id']));
+					}
+					?>
+				</li>
 			</ul>
 		</div>
 	</div>
@@ -85,7 +93,14 @@
 		<?php endif; ?>
 		<div class="actions">
 			<ul>
-				<li><?php echo $this->Html->link(__('Edit Seo Title'), array('controller' => 'seo_titles', 'action' => 'edit', $seoUri['SeoTitle']['id'])); ?></li>
+				<li><?php
+					if (!is_null($seoUri['SeoTitle']['id'])) {
+					 	echo $this->Html->link(__('Edit Seo Title'), array('controller' => 'seo_titles', 'action' => 'edit', $seoUri['SeoTitle']['id']));
+					} else {
+						echo $this->Html->link(__('Add Seo Title'), array('controller' => 'seo_titles', 'action' => 'add'));
+					}
+					?>
+				</li>
 			</ul>
 		</div>
 	</div>

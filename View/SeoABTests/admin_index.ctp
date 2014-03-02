@@ -1,5 +1,5 @@
 <div class="seo_plugin">
-	<?php echo $this->element('seo_admin_filter', array('plugin' => 'seo', 'model' => 'SeoMetaTag')); ?>
+	<?php echo $this->element('seo_admin_filter', array('plugin' => 'seo', 'model' => 'SeoABTest')); ?>
 	<?php echo $this->element('seo_view_head', array('plugin' => 'seo')); ?>
 	<div class="seoABTests index">
 		<h2><?php echo __('Seo A B Tests'); ?></h2>
@@ -14,7 +14,6 @@
 		</tr>
 		<?php foreach ($seoABTests as $seoABTest): ?>
 		<tr>
-			<td><?php echo h($seoABTest['SeoABTest']['id']); ?>&nbsp;</td>
 			<td>
 				<?php echo $this->Html->link($seoABTest['SeoUri']['uri'], array('controller' => 'seo_uris', 'action' => 'view', $seoABTest['SeoUri']['id'])); ?>
 			</td>

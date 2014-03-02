@@ -1,5 +1,5 @@
 <div class="seoABTests view">
-<h2><?php  echo __('Seo A B Test'); ?></h2>
+<h2><?php echo __('Seo A B Test'); ?></h2>
 	<dl>
 		<dt><?php echo __('Id'); ?></dt>
 		<dd>
@@ -16,24 +16,39 @@
 			<?php echo h($seoABTest['SeoABTest']['is_active']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Title'); ?></dt>
-		<dd>
-			<?php echo h($seoABTest['SeoABTest']['title']); ?>
-			&nbsp;
-		</dd>
 		<dt><?php echo __('Slug'); ?></dt>
 		<dd>
 			<?php echo h($seoABTest['SeoABTest']['slug']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Slot'); ?></dt>
+		<dt><?php echo __('Roll'); ?></dt>
 		<dd>
-			<?php echo h($seoABTest['SeoABTest']['slot']); ?>
+			<?php echo h($seoABTest['SeoABTest']['roll']); ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('Priority'); ?></dt>
+		<dd>
+			<?php echo h($seoABTest['SeoABTest']['priority']); ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('Redmine'); ?></dt>
+		<dd>
+			<?php echo h($seoABTest['SeoABTest']['redmine']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Description'); ?></dt>
 		<dd>
 			<?php echo h($seoABTest['SeoABTest']['description']); ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('Start Date'); ?></dt>
+		<dd>
+			<?php echo h($seoABTest['SeoABTest']['start_date']); ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('End Date'); ?></dt>
+		<dd>
+			<?php echo h($seoABTest['SeoABTest']['end_date']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Created'); ?></dt>

@@ -4,10 +4,7 @@
 		<?php echo $this->Form->create('SeoUrl');?>
 		<fieldset>
 			<legend><?php echo __('Admin Add Seo Uri'); ?></legend>
-			<?php
-			echo $this->Form->input('SeoUrl.url');
-			echo $this->Form->input('SeoUrl.priority');
-			?>
+			<?php echo $this->element('SeoUrl/form'); ?>
 		</fieldset>
 		<?php echo $this->Form->end(__('Save All'));?>
 	</div>

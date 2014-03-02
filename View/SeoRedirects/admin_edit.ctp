@@ -4,14 +4,7 @@
 	<?php echo $this->Form->create('SeoRedirect');?>
 		<fieldset>
 			<legend><?php echo __('Admin Edit Seo Redirect'); ?></legend>
-		<?php
-			echo $this->Form->input('id');
-			echo $this->Form->input('SeoUri.uri');
-			echo $this->Form->input('redirect');
-			echo $this->Form->input('priority');
-			echo $this->Form->input('is_active');
-			echo $this->Form->input('callback');
-		?>
+			<?php echo $this->element('SeoRedirect/form'); ?>
 		</fieldset>
 	<?php echo $this->Form->end(__('Submit'));?>
 	</div>
