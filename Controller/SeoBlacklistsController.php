@@ -21,9 +21,6 @@ class SeoBlacklistsController extends SeoAppController {
  */
 	public function admin_index() {
 		$this->Prg->commonProcess(null, array('action' => 'index'));
-		//@TODO this may not be necessary.
-		$this->passedArgs['ip']
-			= str_pad(str_replace('.', '', $this->passedArgs['ip']), 12, "0", STR_PAD_RIGHT);
 		$this->Paginator->settings['conditions']
 			= $this->SeoBlacklist->parseCriteria($this->passedArgs);
 		$this->set('seoBlacklists', $this->Paginator->paginate($this->SeoBlacklist->alias));
