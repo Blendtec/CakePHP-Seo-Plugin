@@ -99,7 +99,7 @@ class SeoAppModel extends AppModel {
  */
 	public function isIp($check = null) {
 		$ipToCheck = array_shift($check);
-		return (ip2long($ipToCheck));
+		return is_numeric(ip2long($ipToCheck));
 	}
 
 /**
