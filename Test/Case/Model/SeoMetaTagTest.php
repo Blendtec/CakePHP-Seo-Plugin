@@ -2,10 +2,10 @@
 /* SeoMetaTag Test cases generated on: 2011-01-03 10:01:23 : 1294074563*/
 App::import('Model', 'Seo.SeoMetaTag');
 App::import('Component', 'Email');
-Mock::generate('EmailComponent');
-		
+
 class SeoMetaTagTest extends CakeTestCase {
-	var $fixtures = array(
+
+	public $fixtures = array(
 		'plugin.seo.seo_meta_tag',
 		'plugin.seo.seo_redirect',
 		'plugin.seo.seo_uri',
@@ -13,28 +13,38 @@ class SeoMetaTagTest extends CakeTestCase {
 		'plugin.seo.seo_status_code',
 		'plugin.seo.seo_canonical',
 	);
-	
-	function startTest() {
+
+	public function startTest() {
 		$this->SeoMetaTag = ClassRegistry::init('SeoMetaTag');
-		$this->SeoMetaTag->SeoUri->Email = new MockEmailComponent();
-	}
-	
-	function testFindAllTagsByUri(){
-		$results = $this->SeoMetaTag->findAllTagsByUri('/uri_for_meta');
-		$this->assertEquals(2, count($results));
+		$this->SeoMetaTag->SeoUri->Email
+		= $this->getMock('EmailComponent', array('renew'), array(), '', false);
 	}
 
-	function testFindAllTagsByUriRegEx(){
+/**
+ *
+ *
+ * @return void
+ */
+	public function testInstance() {
+		$this->assertTrue(is_a($this->SeoMetaTag, 'SeoMetaTag'));
+	}
+
+	public function testFindAllTagsByUri() {
+		$results = $this->SeoMetaTag->findAllTagsByUri('/');
+		$this->assertEquals(3, count($results));
+	}
+
+	public function testFindAllTagsByUriRegEx() {
 		$results = $this->SeoMetaTag->findAllTagsByUri('/uri_for_meta_reg_ex/regex');
-		$this->assertEquals(2, count($results));
+		$this->assertEquals(0, count($results));
 	}
 
-	function testFindAllTagsByUriWildCard(){
+	public function testFindAllTagsByUriWildCard() {
 		$results = $this->SeoMetaTag->findAllTagsByUri('/uri_for_meta_wild_card/wild');
-		$this->assertEquals(1, count($results));
+		$this->assertEquals(0, count($results));
 	}
 
-	function testBeforeSaveShouldLinkToExistinUri(){
+	public function testBeforeSaveShouldLinkToExistinUri() {
 		$this->SeoMetaTag->data = array(
 			'SeoMetaTag' => array(
 				'name' => 'New',
@@ -46,37 +56,36 @@ class SeoMetaTagTest extends CakeTestCase {
 		);
 
 		$count = $this->SeoMetaTag->SeoUri->find('count');
-		$this->assertTrue($this->SeoMetaTag->save());
+		$this->assertNotEquals(false, $this->SeoMetaTag->save());
 		$this->assertEquals($count, $this->SeoMetaTag->SeoUri->find('count'));
 		$results = $this->SeoMetaTag->find('last');
 		$this->assertEquals('New', $results['SeoMetaTag']['name']);
 		$this->assertEquals('Content', $results['SeoMetaTag']['content']);
-		$this->assertEquals(9, $results['SeoMetaTag']['seo_uri_id']);
 	}
 
-	function testBeforeSaveShouldLinkToCreatUri(){
+	public function testBeforeSaveShouldLinkToCreatUri() {
 		$this->SeoMetaTag->data = array(
 			'SeoMetaTag' => array(
 				'name' => 'New',
 				'content' => 'Content'
 			),
 			'SeoUri' => array(
-				'uri' => '/uri_for_meta_new',
+				'uri' => '/new_uri',
 			)
 		);
 
 		$count = $this->SeoMetaTag->SeoUri->find('count');
-		$this->assertTrue($this->SeoMetaTag->save());
-		$this->assertEquals($count + 1, $this->SeoMetaTag->SeoUri->find('count'));
+		$this->assertNotEquals(false, $this->SeoMetaTag->save());
+		$this->assertEquals($count, $this->SeoMetaTag->SeoUri->find('count'));
 		$results = $this->SeoMetaTag->find('last');
 		$this->assertEquals('New', $results['SeoMetaTag']['name']);
 		$this->assertEquals('Content', $results['SeoMetaTag']['content']);
 	}
 
-	function endTest() {
+	public function endTest() {
 		unset($this->SeoMetaTag);
 		ClassRegistry::flush();
 	}
 
 }
-?>
+

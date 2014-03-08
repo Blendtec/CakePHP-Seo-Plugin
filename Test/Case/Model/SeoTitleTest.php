@@ -3,7 +3,8 @@
 App::import('Model', 'Seo.SeoTitle');
 
 class SeoTitleTest extends CakeTestCase {
-	var $fixtures = array(
+
+	public $fixtures = array(
 		'plugin.seo.seo_title',
 		'plugin.seo.seo_redirect',
 		'plugin.seo.seo_uri',
@@ -12,14 +13,23 @@ class SeoTitleTest extends CakeTestCase {
 		'plugin.seo.seo_canonical',
 	);
 
-	function startTest() {
+	public function setup() {
 		$this->SeoTitle = ClassRegistry::init('SeoTitle');
 	}
 
-	function endTest() {
+/**
+ *
+ *
+ * @return void
+ */
+	public function testInstance() {
+		$this->assertTrue(is_a($this->SeoTitle, 'SeoTitle'));
+	}
+
+	public function endTest() {
 		unset($this->SeoTitle);
 		ClassRegistry::flush();
 	}
 
 }
-?>
+

@@ -1,11 +1,11 @@
 <?php
 /* SeoStatusCode Test cases generated on: 2011-07-25 17:06:33 : 1311635193*/
-App::import('Model', 'seo.SeoStatusCode');
+App::import('Model', 'Seo.SeoStatusCode');
 App::import('Component', 'Email');
-Mock::generate('EmailComponent');
 
 class SeoStatusCodeTest extends CakeTestCase {
-	var $fixtures = array(
+
+	public $fixtures = array(
 		'plugin.seo.seo_redirect',
 		'plugin.seo.seo_uri',
 		'plugin.seo.seo_meta_tag',
@@ -14,16 +14,23 @@ class SeoStatusCodeTest extends CakeTestCase {
 		'plugin.seo.seo_canonical',
 	);
 
-	function startTest() {
-		$this->SeoStatusCode = ClassRegistry::init('SeoStatusCode');
-		$this->SeoRedirect->SeoUri->Email = new MockEmailComponent();
+	public function setUp() {
+		$this->SeoStatusCode = ClassRegistry::init('Seo.SeoStatusCode');
 	}
-	
-	
 
-	function endTest() {
+/**
+ *
+ *
+ * @return void
+ */
+	public function testInstance() {
+		$this->assertTrue(is_a($this->SeoStatusCode, 'SeoStatusCode'));
+	}
+
+	public function endTest() {
 		unset($this->SeoStatusCode);
 		ClassRegistry::flush();
 	}
 
 }
+

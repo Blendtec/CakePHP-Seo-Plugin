@@ -11,115 +11,124 @@ class SeoMetaTagFixture extends CakeTestFixture {
  * @var array
  */
 	public $fields = array(
-		'id' => array('type' => 'string', 'null' => false, 'length' => 36, 'key' => 'primary'),
-		'seo_uri_id' => array('type' => 'string', 'null' => false, 'length' => 36),
-		'name' => array('type' => 'string', 'null' => true, 'default' => null),
-		'content' => array('type' => 'string', 'null' => true, 'default' => null),
-		'is_http_equiv' => array('type' => 'boolean', 'null' => false, 'default' => false),
-		'created' => array('type' => 'datetime', 'null' => true),
-		'modified' => array('type' => 'datetime', 'null' => true),
+		'id' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 36, 'key' => 'primary', 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
+		'seo_uri_id' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 36, 'key' => 'index', 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
+		'name' => array('type' => 'string', 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
+		'content' => array('type' => 'string', 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
+		'is_http_equiv' => array('type' => 'boolean', 'null' => false, 'default' => '0'),
+		'created' => array('type' => 'datetime', 'null' => true, 'default' => null),
+		'modified' => array('type' => 'datetime', 'null' => true, 'default' => null),
 		'indexes' => array(
-			'PRIMARY' => array('unique' => true, 'column' => 'id'),
-			'seo_meta_tags_seo_uri_id' => array('unique' => false, 'column' => 'seo_uri_id')
+			'PRIMARY' => array('column' => 'id', 'unique' => 1),
+			'SEO_META_TAGS_SEO_URI_ID' => array('column' => 'seo_uri_id', 'unique' => 0)
 		),
 		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'MyISAM')
 	);
 
-	/**
-	 * Records
-	 *
-	 * @var array
-	 */
+/**
+ * Records
+ *
+ * @var array
+ */
 	public $records = array(
 		array(
-			'id' => '527a88aa-24fc-4d34-b161-1f2042cbcf71',
-			'seo_uri_id' => '527a88aa-72f0-46ca-beb5-1f2042cbcf71',
+			'id' => '53129048-f904-4a25-9f0d-0c07ccb469e7',
+			'seo_uri_id' => '531288d1-4c4c-46ab-b1e2-0bc4ccb469e7',
 			'name' => 'description',
-			'content' => ' The Total Blender is the all-in-one appliance that makes smoothies, fresh juice, ice cream, milkshakes, cappuccinos, margaritas, soups, sauces, bread',
-			'is_http_equiv' => 0,
-			'created' => '2013-11-06 18:21:30',
-			'modified' => '2013-11-06 18:21:30'
+			'content' => 'THIS IS THE DESCRIPTION TAG',
+			'is_http_equiv' => 1,
+			'created' => '2014-03-01 18:58:32',
+			'modified' => '2014-03-01 18:58:32'
 		),
 		array(
-			'id' => '527a88aa-9868-4143-8d0b-1f2042cbcf71',
-			'seo_uri_id' => '527a88aa-a6a4-46ce-8a54-1f2042cbcf71',
-			'name' => 'description',
-			'content' => 'The cyclone cup is an essential part of the Kitchen Mill™, catching any overflow of flour and preventing flour from coming out the sides of the machine.',
-			'is_http_equiv' => 0,
-			'created' => '2013-11-06 18:21:30',
-			'modified' => '2013-11-06 18:21:30'
+			'id' => '53129048-ebfc-49d0-a2b2-0c07ccb469e7',
+			'seo_uri_id' => '531288d1-4c4c-46ab-b1e2-0bc4ccb469e7',
+			'name' => 'keywords',
+			'content' => 'KEY WORDS HERE',
+			'is_http_equiv' => 1,
+			'created' => '2014-03-01 18:58:32',
+			'modified' => '2014-03-01 18:58:32'
 		),
 		array(
-			'id' => '527a88aa-29a8-4767-868d-1f2042cbcf71',
-			'seo_uri_id' => '527a88aa-52d8-4faf-8d19-1f2042cbcf71',
-			'name' => 'description',
-			'content' => 'Kneading Arm replacement part for Mix n\' Blend II.  See this and more replacement parts here.',
-			'is_http_equiv' => 0,
-			'created' => '2013-11-06 18:21:30',
-			'modified' => '2013-11-06 18:21:30'
+			'id' => '53129048-c84c-4e8b-a2d8-0c07ccb469e7',
+			'seo_uri_id' => '531288d1-4c4c-46ab-b1e2-0bc4ccb469e7',
+			'name' => 'author',
+			'content' => 'THE AUTHOR TAG',
+			'is_http_equiv' => 1,
+			'created' => '2014-03-01 18:58:32',
+			'modified' => '2014-03-01 18:58:32'
 		),
 		array(
-			'id' => '527a88aa-9504-4904-ad39-1f2042cbcf71',
-			'seo_uri_id' => '527a88aa-d158-423f-a6ef-1f2042cbcf71',
+			'id' => '5312925f-e1d4-454f-830e-0bddccb469e7',
+			'seo_uri_id' => '5312925f-d9e8-41c5-8d10-0bddccb469e7',
 			'name' => 'description',
-			'content' => 'Mixing Bowl replacement part for Mix n\' Blend II.  See this and more replacement parts here.',
-			'is_http_equiv' => 0,
-			'created' => '2013-11-06 18:21:30',
-			'modified' => '2013-11-06 18:21:30'
+			'content' => 'MICKEY AND WESLEY ARE TERRIBLE',
+			'is_http_equiv' => 1,
+			'created' => '2014-03-01 19:07:27',
+			'modified' => '2014-03-02 14:42:06'
 		),
 		array(
-			'id' => '527a88aa-0704-4d88-b5f8-1f2042cbcf71',
-			'seo_uri_id' => '527a88aa-34e4-45dc-9799-1f2042cbcf71',
-			'name' => 'description',
-			'content' => 'Replacement drive shaft for the German Mixer.  Learn more about this and other replacement parts here.',
-			'is_http_equiv' => 0,
-			'created' => '2013-11-06 18:21:30',
-			'modified' => '2013-11-06 18:21:30'
+			'id' => '5312925f-9f48-466a-9965-0bddccb469e7',
+			'seo_uri_id' => '5312925f-d9e8-41c5-8d10-0bddccb469e7',
+			'name' => 'charset',
+			'content' => 'UTF-8',
+			'is_http_equiv' => 1,
+			'created' => '2014-03-01 19:07:27',
+			'modified' => '2014-03-01 19:07:27'
 		),
 		array(
-			'id' => '527a88aa-74b8-4028-b772-1f2042cbcf71',
-			'seo_uri_id' => '527a88aa-a0a4-4621-83bc-1f2042cbcf71',
-			'name' => 'description',
-			'content' => 'Mixing Bowl Lid replacement part for Mix n\' Blend II.  See this and more replacement parts here.',
+			'id' => '5312925f-4e48-439b-bb30-0bddccb469e7',
+			'seo_uri_id' => '5312925f-d9e8-41c5-8d10-0bddccb469e7',
+			'name' => 'cache-control',
+			'content' => 'NO-CACHE',
 			'is_http_equiv' => 0,
-			'created' => '2013-11-06 18:21:30',
-			'modified' => '2013-11-06 18:21:30'
+			'created' => '2014-03-01 19:07:27',
+			'modified' => '2014-03-01 19:07:27'
 		),
 		array(
-			'id' => '527a88aa-3d70-4946-86fd-1f2042cbcf71',
-			'seo_uri_id' => '527a88aa-2ec4-44b5-b213-1f2042cbcf71',
-			'name' => 'description',
-			'content' => 'Dough hook replacement part for Mix n\' Blend II.  See this and more replacement parts here.',
-			'is_http_equiv' => 0,
-			'created' => '2013-11-06 18:21:30',
-			'modified' => '2013-11-06 18:21:30'
+			'id' => '5313a5c0-efc0-4738-b307-0c05ccb469e7',
+			'seo_uri_id' => '5313a5c0-51f0-49a3-a68b-0c05ccb469e7',
+			'name' => 'Copyright',
+			'content' => '&copy; 20014 Stone Lasley',
+			'is_http_equiv' => 1,
+			'created' => '2014-03-02 14:42:24',
+			'modified' => '2014-03-02 14:42:24'
 		),
 		array(
-			'id' => '527a88aa-c5b4-4c02-912f-1f2042cbcf71',
-			'seo_uri_id' => '527a88aa-e0d4-4c4e-8bf6-1f2042cbcf71',
-			'name' => 'description',
-			'content' => 'Blendtec professional-grade kitchen blenders. Choose from our wide variety of colors. Order yours today! Call 1-800-BLENDTEC',
-			'is_http_equiv' => 0,
-			'created' => '2013-11-06 18:21:30',
-			'modified' => '2013-11-06 18:21:30'
+			'id' => '5313b146-55d8-46a8-890a-0c05ccb469e7',
+			'seo_uri_id' => '5313a904-ca7c-4cee-9aed-0c05ccb469e7',
+			'name' => 'EXPIRES',
+			'content' => 'Mon, 22 Jul 20014 11:12:01 GMT',
+			'is_http_equiv' => 1,
+			'created' => '2014-03-02 15:31:34',
+			'modified' => '2014-03-02 15:31:34'
 		),
 		array(
-			'id' => '527a88aa-4754-42f9-9e74-1f2042cbcf71',
-			'seo_uri_id' => '527a88aa-65f8-488f-a2dd-1f2042cbcf71',
-			'name' => 'description',
-			'content' => ' The Total Blender is the all-in-one appliance that makes smoothies, fresh juice, ice cream, milkshakes, cappuccinos, margaritas, soups, sauces, bread',
-			'is_http_equiv' => 0,
-			'created' => '2013-11-06 18:21:30',
-			'modified' => '2013-11-06 18:21:30'
+			'id' => '5313b146-fa28-490c-a0b0-0c05ccb469e7',
+			'seo_uri_id' => '5313a904-ca7c-4cee-9aed-0c05ccb469e7',
+			'name' => 'ROBOTS',
+			'content' => 'ALL',
+			'is_http_equiv' => 1,
+			'created' => '2014-03-02 15:31:34',
+			'modified' => '2014-03-02 15:31:34'
 		),
 		array(
-			'id' => '527a88aa-bda0-4f12-b8a2-1f2042cbcf71',
-			'seo_uri_id' => '527a88aa-e798-486c-a774-1f2042cbcf71',
-			'name' => 'description',
-			'content' => 'Blendtec professional-grade kitchen blenders. Choose from our wide variety of colors. Order yours today! Call 1-800-BLENDTEC',
-			'is_http_equiv' => 0,
-			'created' => '2013-11-06 18:21:30',
-			'modified' => '2013-11-06 18:21:30'
+			'id' => '5313b146-074c-42a2-b85c-0c05ccb469e7',
+			'seo_uri_id' => '5313a904-ca7c-4cee-9aed-0c05ccb469e7',
+			'name' => 'GOOGLEBOT',
+			'content' => 'NOARCHIVE',
+			'is_http_equiv' => 1,
+			'created' => '2014-03-02 15:31:34',
+			'modified' => '2014-03-02 15:31:34'
+		),
+		array(
+			'id' => '5313b146-111-42a2-b85c-0c05ccb469e7',
+			'seo_uri_id' => '5313a904-abcd-4cee-9aed-0c05ccb469e7',
+			'name' => 'GOOGLEBOT',
+			'content' => 'NOARCHIVE',
+			'is_http_equiv' => 1,
+			'created' => '2014-03-02 15:31:34',
+			'modified' => '2014-03-02 15:31:34'
 		),
 	);
 

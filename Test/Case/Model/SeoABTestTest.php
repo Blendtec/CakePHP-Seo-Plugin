@@ -26,6 +26,14 @@ class SeoABTestTest extends CakeTestCase {
 		parent::setUp();
 		$this->SeoABTest = ClassRegistry::init('Seo.SeoABTest');
 	}
+/**
+*
+*
+* @return void
+*/
+	public function testInstance() {
+		$this->assertTrue(is_a($this->SeoABTest, 'SeoABTest'));
+	}
 
 /**
  * tearDown method
@@ -36,6 +44,9 @@ class SeoABTestTest extends CakeTestCase {
 		unset($this->SeoABTest);
 
 		parent::tearDown();
+	}
+
+	public function testBlank() {
 	}
 
 }

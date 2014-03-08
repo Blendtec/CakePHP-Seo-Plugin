@@ -5,100 +5,79 @@
  */
 class SeoUriFixture extends CakeTestFixture {
 
-	/**
-	 * Fields
-	 *
-	 * @var array
-	 */
+/**
+ * Fields
+ *
+ * @var array
+ */
 	public $fields = array(
-		'id' => array('type' => 'string', 'null' => false, 'length' => 36, 'key' => 'primary'),
-		'uri' => array('type' => 'string', 'null' => true, 'default' => null),
-		'is_approved' => array('type' => 'boolean', 'null' => false, 'default' => true),
-		'created' => array('type' => 'datetime', 'null' => true),
-		'modified' => array('type' => 'datetime', 'null' => true),
+		'id' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 36, 'key' => 'primary', 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
+		'uri' => array('type' => 'string', 'null' => true, 'default' => null, 'key' => 'unique', 'collate' => 'utf8_bin', 'charset' => 'utf8'),
+		'is_approved' => array('type' => 'boolean', 'null' => false, 'default' => '1', 'key' => 'index'),
+		'created' => array('type' => 'datetime', 'null' => true, 'default' => null),
+		'modified' => array('type' => 'datetime', 'null' => true, 'default' => null),
 		'indexes' => array(
-			'PRIMARY' => array('unique' => true, 'column' => 'id'),
-			'seo_uris_unique_uri' => array('unique' => true, 'column' => 'uri'),
-			'seo_uris_is_approved' => array('unique' => false, 'column' => 'is_approved')
+			'PRIMARY' => array('column' => 'id', 'unique' => 1),
+			'SEO_URIS_UNIQUE_URI' => array('column' => 'uri', 'unique' => 1),
+			'SEO_URIS_IS_APPROVED' => array('column' => 'is_approved', 'unique' => 0)
 		),
-		'tableParameters' => array()
+		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'MyISAM')
 	);
 
-	/**
-	 * Records
-	 *
-	 * @var array
-	 */
+/**
+ * Records
+ *
+ * @var array
+ */
 	public $records = array(
 		array(
-			'id' => '527a88aa-72f0-46ca-beb5-1f2042cbcf71',
-			'uri' => '/products/total_blender_classic_series_wildside_combo_white',
+			'id' => '531288d1-4c4c-46ab-b1e2-0bc4ccb469e7',
+			'uri' => '/',
 			'is_approved' => 1,
-			'created' => '2013-11-06 18:21:30',
-			'modified' => '2013-11-06 18:21:30'
+			'created' => '2014-03-01 18:26:41',
+			'modified' => '2014-03-01 18:58:32'
 		),
 		array(
-			'id' => '527a88aa-a6a4-46ce-8a54-1f2042cbcf71',
-			'uri' => '/products/cyclone_cup',
+			'id' => '5312925f-d9e8-41c5-8d10-0bddccb469e7',
+			'uri' => '/dogs',
 			'is_approved' => 1,
-			'created' => '2013-11-06 18:21:30',
-			'modified' => '2013-11-06 18:21:30'
+			'created' => '2014-03-01 19:07:27',
+			'modified' => '2014-03-01 19:07:27'
 		),
 		array(
-			'id' => '527a88aa-52d8-4faf-8d19-1f2042cbcf71',
-			'uri' => '/products/kneading_arm',
+			'id' => '53139850-c644-4836-905c-0bc5ccb469e7',
+			'uri' => '/mickey boy',
 			'is_approved' => 1,
-			'created' => '2013-11-06 18:21:30',
-			'modified' => '2013-11-06 18:21:30'
+			'created' => '2014-03-02 13:45:04',
+			'modified' => '2014-03-02 13:45:04'
 		),
 		array(
-			'id' => '527a88aa-d158-423f-a6ef-1f2042cbcf71',
-			'uri' => '/products/mixing_bowl',
+			'id' => '5313a493-7274-413e-aa8b-0bc2ccb469e7',
+			'uri' => '/pond',
 			'is_approved' => 1,
-			'created' => '2013-11-06 18:21:30',
-			'modified' => '2013-11-06 18:21:30'
+			'created' => '2014-03-02 14:37:23',
+			'modified' => '2014-03-02 14:37:23'
 		),
 		array(
-			'id' => '527a88aa-34e4-45dc-9799-1f2042cbcf71',
-			'uri' => '/products/drive_shaft_german',
+			'id' => '5313a5c0-51f0-49a3-a68b-0c05ccb469e7',
+			'uri' => '/index',
 			'is_approved' => 1,
-			'created' => '2013-11-06 18:21:30',
-			'modified' => '2013-11-06 18:21:30'
+			'created' => '2014-03-02 14:42:24',
+			'modified' => '2014-03-02 14:42:24'
 		),
 		array(
-			'id' => '527a88aa-a0a4-4621-83bc-1f2042cbcf71',
-			'uri' => '/products/mixing_bowl_lid',
-			'is_approved' => 1,
-			'created' => '2013-11-06 18:21:30',
-			'modified' => '2013-11-06 18:21:30'
+			'id' => '5313a904-ca7c-4cee-9aed-0c05ccb469e7',
+			'uri' => '/doggies',
+			'is_approved' => 0,
+			'created' => '2014-03-02 14:56:20',
+			'modified' => '2014-03-02 15:31:34'
 		),
 		array(
-			'id' => '527a88aa-2ec4-44b5-b213-1f2042cbcf71',
-			'uri' => '/products/dough_hook',
-			'is_approved' => 1,
-			'created' => '2013-11-06 18:21:30',
-			'modified' => '2013-11-06 18:21:30'
-		),
-		array(
-			'id' => '527a88aa-e0d4-4c4e-8bf6-1f2042cbcf71',
-			'uri' => '/products/total_blender_classic_series_wildside_white',
-			'is_approved' => 1,
-			'created' => '2013-11-06 18:21:30',
-			'modified' => '2013-11-06 18:21:30'
-		),
-		array(
-			'id' => '527a88aa-65f8-488f-a2dd-1f2042cbcf71',
-			'uri' => '/products/total_blender_classic_series_wildside_combo_red',
-			'is_approved' => 1,
-			'created' => '2013-11-06 18:21:30',
-			'modified' => '2013-11-06 18:21:30'
-		),
-		array(
-			'id' => '527a88aa-e798-486c-a774-1f2042cbcf71',
-			'uri' => '/products/total_blender_classic_series_wildside_red',
-			'is_approved' => 1,
-			'created' => '2013-11-06 18:21:30',
-			'modified' => '2013-11-06 18:21:30'
+			'id' => '5313a904-abcd-4cee-9aed-0c05ccb469e7',
+			'uri' => '/posts',
+			'is_approved' => 0,
+			'created' => '2014-03-02 14:56:20',
+			'modified' => '2014-03-02 15:31:34'
 		),
 	);
 
