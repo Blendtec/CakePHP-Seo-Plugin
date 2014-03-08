@@ -34,9 +34,8 @@ matrix:
 before_script:
   - git clone -b master https://github.com/FriendsOfCake/travis.git --depth 1 ../travis
   - ../travis/before_script.sh
-  - git clone -b master https://github.com/CakeDC/search.git --depth 1 Plugin/Search
-  - cd $PLUGIN_PATH/Search
-  - cd ../Seo
+  - echo $SELF_PATH
+  - echo $REPO_PATH
 
 script:
   - ../travis/script.sh
