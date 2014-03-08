@@ -51,7 +51,7 @@ class SeoRedirectTest extends CakeTestCase {
 		$this->assertTrue($this->SeoRedirect->saveAll());
 		$result = $this->SeoRedirect->find('last');
 		$this->assertTrue($result['SeoUri']['is_approved']);
-		//@TODO fix mocked email
+		// fix mocked email
 		//$this->SeoRedirect->SeoUri->Email->expectNever('send');
 	}
 
@@ -69,7 +69,7 @@ class SeoRedirectTest extends CakeTestCase {
 		$this->assertTrue($this->SeoRedirect->saveAll());
 		$result = $this->SeoRedirect->find('last');
 		$this->assertFalse($result['SeoUri']['is_approved']);
-		//@TODO fix mocked emails
+		//fix mocked emails
 		//$this->SeoRedirect->SeoUri->Email->expectOnce('send');
 	}
 

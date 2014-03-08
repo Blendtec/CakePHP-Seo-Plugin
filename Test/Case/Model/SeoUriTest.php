@@ -53,7 +53,6 @@ class SeoUriTest extends CakeTestCase {
 
 	//	public function testSendNotification() {
 	//		$this->SeoUri->id = '5313a904-ca7c-4cee-9aed-0c05ccb469e7';
-	//		//@TODO fix
 	//		//$this->SeoUri->Email->expectOnce('send');
 	//		$this->SeoUri->sendNotification();
 	//		$this->assertEquals('301 Redirect: #(.*)#i to / needs approval', $this->SeoUri->Email->subject);
