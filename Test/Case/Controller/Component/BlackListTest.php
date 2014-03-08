@@ -3,10 +3,9 @@ App::uses('Controller', 'Controller');
 App::uses('Component', 'Controller');
 App::uses('ComponentCollection', 'Controller');
 App::uses('BlackListComponent', 'Seo.Controller/Component');
-//App::import('Component', 'Seo.Controller/Component/BlackList');
-//App::import('Model', 'Seo.SeoHoneypotVisit');
 
 class TestSeoBlackListController extends Controller {
+
 	public $paginate = null;
 }
 
