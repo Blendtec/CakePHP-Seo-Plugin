@@ -7,7 +7,7 @@ php:
 
 env:
   global:
-    - PLUGIN_NAME=CakePHPSeoPlugin
+    - PLUGIN_NAME=Seo
     - REQUIRE=""
 
   matrix:
