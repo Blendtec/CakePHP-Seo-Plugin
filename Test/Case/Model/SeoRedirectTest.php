@@ -14,7 +14,8 @@ class SeoRedirectTest extends CakeTestCase {
 		'plugin.seo.seo_canonical',
 	);
 
-	public function startTest() {
+	public function setUp() {
+		parent::setUp();
 		$this->SeoRedirect = ClassRegistry::init('Seo.SeoRedirect');
 		$this->SeoRedirect->SeoUri->Email
 			= $this->getMock('EmailComponent', array('send'), array(), '', false);
@@ -50,7 +51,7 @@ class SeoRedirectTest extends CakeTestCase {
 		$this->assertTrue($this->SeoRedirect->saveAll());
 		$result = $this->SeoRedirect->find('last');
 		$this->assertTrue($result['SeoUri']['is_approved']);
-		//@TODO fix mocked email
+		// fix mocked email
 		//$this->SeoRedirect->SeoUri->Email->expectNever('send');
 	}
 
@@ -68,7 +69,7 @@ class SeoRedirectTest extends CakeTestCase {
 		$this->assertTrue($this->SeoRedirect->saveAll());
 		$result = $this->SeoRedirect->find('last');
 		$this->assertFalse($result['SeoUri']['is_approved']);
-		//@TODO fix mocked emails
+		//fix mocked emails
 		//$this->SeoRedirect->SeoUri->Email->expectOnce('send');
 	}
 
@@ -77,7 +78,8 @@ class SeoRedirectTest extends CakeTestCase {
 		$this->assertEquals(2, count($results));
 	}
 
-	public function endTest() {
+	public function tearDown() {
+		parent::tearDown();
 		unset($this->SeoRedirect);
 		ClassRegistry::flush();
 	}

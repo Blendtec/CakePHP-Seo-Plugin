@@ -3,10 +3,9 @@ App::uses('Controller', 'Controller');
 App::uses('Component', 'Controller');
 App::uses('ComponentCollection', 'Controller');
 App::uses('BlackListComponent', 'Seo.Controller/Component');
-//App::import('Component', 'Seo.Controller/Component/BlackList');
-//App::import('Model', 'Seo.SeoHoneypotVisit');
 
 class TestSeoBlackListController extends Controller {
+
 	public $paginate = null;
 }
 
@@ -24,21 +23,21 @@ class BlackListTest extends CakeTestCase {
 	}
 
 	public function testIsBannedRedirect() {
-//		$this->BlackListComponent->Controller->here = '/';
-//		$this->BlackListComponent->Controller->expectOnce('redirect');
-//		$this->assertTrue($this->BlackList->__isBanned());
+		//$this->BlackListComponent->Controller->here = '/';
+		//$this->BlackListComponent->Controller->expectOnce('redirect');
+		//$this->assertTrue($this->BlackList->isBanned());
 	}
 
 	public function testIsBannedOnBannedPage() {
-//		$this->BlackListComponent->Controller->here = '/seo/seo_blacklists/banned';
-//		$this->BlackListComponent->Controller->expectNever('redirect');
-//		$this->assertTrue($this->BlackList->__isBanned());
+		//$this->BlackListComponent->Controller->here = '/seo/seo_blacklists/banned';
+		//$this->BlackListComponent->Controller->expectNever('redirect');
+		//$this->assertTrue($this->BlackList->isBanned());
 	}
 
 	public function testHandleHoneyPot() {
-//		$this->BlackListComponent->Controller->here = '/seo/seo_blacklists/honeypot';
-//		$this->BlackListComponent->Controller->expectOnce('redirect');
-//		$this->assertTrue($this->BlackList->__isBanned());
+		//$this->BlackListComponent->Controller->here = '/seo/seo_blacklists/honeypot';
+		//$this->BlackListComponent->Controller->expectOnce('redirect');
+		//$this->assertTrue($this->BlackList->isBanned());
 	}
 
 	public function tearDown() {

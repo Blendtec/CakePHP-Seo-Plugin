@@ -6,7 +6,8 @@ class SeoSearchTermTest extends CakeTestCase {
 
 	public $fixtures = array('plugin.seo.seo_search_term');
 
-	public function startTest() {
+	public function setUp() {
+		parent::setUp();
 		$this->SeoSearchTerm = ClassRegistry::init('SeoSearchTerm');
 	}
 
@@ -57,7 +58,8 @@ class SeoSearchTermTest extends CakeTestCase {
 		$this->assertEquals($count - 1, $this->SeoSearchTerm->find('count'));
 	}
 
-	public function endTest() {
+	public function tearDown() {
+		parent::tearDown();
 		unset($this->SeoSearchTerm);
 		ClassRegistry::flush();
 	}

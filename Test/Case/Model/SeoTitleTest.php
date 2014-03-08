@@ -26,7 +26,8 @@ class SeoTitleTest extends CakeTestCase {
 		$this->assertTrue(is_a($this->SeoTitle, 'SeoTitle'));
 	}
 
-	public function endTest() {
+	public function tearDown() {
+		parent::tearDown();
 		unset($this->SeoTitle);
 		ClassRegistry::flush();
 	}

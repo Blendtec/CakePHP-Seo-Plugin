@@ -6,7 +6,8 @@ class SeoBlacklistTest extends CakeTestCase {
 
 	public $fixtures = array('plugin.seo.seo_blacklist');
 
-	public function startTest() {
+	public function setUp() {
+		parent::setUp();
 		$this->SeoBlacklist = ClassRegistry::init('SeoBlacklist');
 	}
 
@@ -83,7 +84,8 @@ class SeoBlacklistTest extends CakeTestCase {
 		$this->assertEquals('remote', $this->SeoBlacklist->getIpFromServer());
 	}
 
-	public function endTest() {
+	public function tearDown() {
+		parent::tearDown();
 		unset($this->SeoBlacklist);
 		ClassRegistry::flush();
 	}

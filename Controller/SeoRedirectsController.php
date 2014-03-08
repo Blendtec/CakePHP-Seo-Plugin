@@ -62,4 +62,3 @@ class SeoRedirectsController extends SeoAppController {
 		$this->redirect(array('action' => 'index'));
 	}
 }
-?>

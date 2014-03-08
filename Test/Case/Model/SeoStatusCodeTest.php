@@ -27,7 +27,8 @@ class SeoStatusCodeTest extends CakeTestCase {
 		$this->assertTrue(is_a($this->SeoStatusCode, 'SeoStatusCode'));
 	}
 
-	public function endTest() {
+	public function tearDown() {
+		parent::tearDown();
 		unset($this->SeoStatusCode);
 		ClassRegistry::flush();
 	}

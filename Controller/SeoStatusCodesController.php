@@ -55,14 +55,13 @@ class SeoStatusCodesController extends SeoAppController {
 	public function admin_delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for seo status code'));
-			$this->redirect(array('action'=>'index'));
+			$this->redirect(array('action' => 'index'));
 		}
 		if ($this->SeoStatusCode->delete($id)) {
 			$this->Session->setFlash(__('Seo status code deleted'));
-			$this->redirect(array('action'=>'index'));
+			$this->redirect(array('action' => 'index'));
 		}
 		$this->Session->setFlash(__('Seo status code was not deleted'));
 		$this->redirect(array('action' => 'index'));
 	}
 }
-?>

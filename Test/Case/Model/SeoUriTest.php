@@ -51,14 +51,13 @@ class SeoUriTest extends CakeTestCase {
 		$this->assertTrue($this->SeoUri->field('is_approved'));
 	}
 
-//	public function testSendNotification() {
-//		$this->SeoUri->id = '5313a904-ca7c-4cee-9aed-0c05ccb469e7';
-//		//@TODO fix
-//		//$this->SeoUri->Email->expectOnce('send');
-//		$this->SeoUri->sendNotification();
-//		$this->assertEquals('301 Redirect: #(.*)#i to / needs approval', $this->SeoUri->Email->subject);
-//		$this->assertEquals('html', $this->SeoUri->Email->sendAs);
-//	}
+	//	public function testSendNotification() {
+	//		$this->SeoUri->id = '5313a904-ca7c-4cee-9aed-0c05ccb469e7';
+	//		//$this->SeoUri->Email->expectOnce('send');
+	//		$this->SeoUri->sendNotification();
+	//		$this->assertEquals('301 Redirect: #(.*)#i to / needs approval', $this->SeoUri->Email->subject);
+	//		$this->assertEquals('html', $this->SeoUri->Email->sendAs);
+	//	}
 
 	public function testDeleteUriDeletesMeta() {
 		$this->assertTrue($this->SeoUri->SeoMetaTag->hasAny(array('id' => '53129048-f904-4a25-9f0d-0c07ccb469e7')));
@@ -74,7 +73,8 @@ class SeoUriTest extends CakeTestCase {
 		$this->assertFalse($this->SeoUri->SeoRedirect->hasAny(array('id' => '5313b3c4-cf4c-42ff-a6a8-0c06ccb469e7')));
 	}
 
-	public function endTest() {
+	public function tearDown() {
+		parent::tearDown();
 		unset($this->SeoUri);
 		ClassRegistry::flush();
 	}

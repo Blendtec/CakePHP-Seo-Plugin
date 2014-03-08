@@ -33,7 +33,9 @@ class SeoUrl extends SeoAppModel {
  */
 	public $settings = array();
 
-/**import
+/**
+ * import
+ *
  * Load the settings
  */
 	public function __construct($id = false, $table = null, $ds = null) {

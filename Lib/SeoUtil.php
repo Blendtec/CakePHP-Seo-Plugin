@@ -14,13 +14,13 @@ class SeoUtil extends Object {
  * @var array
  */
 	public static $configs = array();
-	
+
 /**
  * Return version number
  * @return string version number
  * @access public
  */
-	static function version() {
+	public static function version() {
 		return "6.1.0";
 	}
 
@@ -73,7 +73,12 @@ class SeoUtil extends Object {
 			return self::$configs[$key];
 		}
 		//try load configuration file and try again.
-		Configure::load('seo');
+		try{
+			Configure::load('seo');
+		} catch(ConfigureException $e) {
+			Configure::load('Seo.seo');
+		}
+		//debug(Configure::load('seo'));
 		self::$configs = Configure::read('Seo');
 		if (self::$configs[$key] = Configure::read("Seo.$key")) {
 			return self::$configs[$key];

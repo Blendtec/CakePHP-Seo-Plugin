@@ -26,7 +26,7 @@ class SeoBlacklist extends SeoAppModel {
  * @var array
  */
 	public $filterArgs = array (
-		//@TODO ip searching doesn't work.
+		//@ip searching doesn't work.
 		'ip' => array('type' => 'expression', 'method' => 'makeRangeCondition', 'field' => 'SeoBlacklist.ip_range_start <= ?'),
 		'is_active' => array ('type' => 'value', 'empty' => false)
 	);
