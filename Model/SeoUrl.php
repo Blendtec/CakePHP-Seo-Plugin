@@ -21,7 +21,7 @@ class SeoUrl extends SeoAppModel {
 
 /**
  * Default filter args for building search queries using the searchable behavior
- *
+ *import
  * @public array
  */
 	public $filterArgs = array (
@@ -33,7 +33,7 @@ class SeoUrl extends SeoAppModel {
  */
 	public $settings = array();
 
-/**
+/**import
  * Load the settings
  */
 	public function __construct($id = false, $table = null, $ds = null) {
@@ -44,23 +44,27 @@ class SeoUrl extends SeoAppModel {
 /**
  * Import a set of valid URLS from a sitemap
  *
- * @param string path to sitemap we want to parse
- * @param boolean clear the set first, then import.
- * @param boolean verbose
- * @param int count of imported urls
+ * @param string $sitemapPath path to sitemap we want to parse defaults to webroot/site-map.xml
+ * @param bool $clearAll
+ * @param bool $verbose
+ * @throws NotFoundException
+ * @internal param \clear $boolean the set first, then import.
+ * @internal param \verbose $boolean
+ * @internal param \count $int of imported urls
  * @return int
  */
-	public function import($sitemap = null, $clearAll = true, $verbose = false) {
+	public function import($sitemapPath = null, $clearAll = true, $verbose = false) {
 		$count = 0;
 		if ($this->settings['active']) {
-			if ($sitemap) {
-				$this->settings['source'] = $sitemap;
+
+			if (!file_exists($this->__getPathToSiteMap($sitemapPath))) {
+				throw new NotFoundException("File not found.");
 			}
 			if ($clearAll) {
 				$this->deleteAll(1);
 			}
 
-			$xml = simplexml_load_file($this->__getPathToSiteMap());
+			$xml = simplexml_load_file($this->__getPathToSiteMap($sitemapPath));
 			foreach ($xml->url as $url) {
 				$this->clear();
 				$saveData = array(
@@ -131,13 +135,14 @@ class SeoUrl extends SeoAppModel {
 /**
  * Get the file out of the source config
  *
+ * @param $path
  * @return string file path to source.
  */
-	private function __getPathToSiteMap() {
-		if (strpos($this->settings['source'], '/') === 0) {
-			return WWW_ROOT . substr($this->settings['source'], 1, strlen($this->settings['source']));
+	private function __getPathToSiteMap($path) {
+		if ($path === null) {
+			return WWW_ROOT . DS . 'site-map.xml';
 		} else {
-			return $this->settings['source'];
+			return $path;
 		}
 	}
 }
