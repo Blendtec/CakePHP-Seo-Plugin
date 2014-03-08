@@ -106,7 +106,8 @@ class SeoHelperTest extends CakeTestCase {
 		$this->assertEquals('<title>default</title>', $results);
 	}
 
-	public function endTest() {
+	public function tearDown() {
+		parent::tearDown();
 		unset($this->SeometaTagsTag);
 		ClassRegistry::flush();
 	}

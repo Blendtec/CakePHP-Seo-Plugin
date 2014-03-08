@@ -8,7 +8,8 @@ class SeoUrlTest extends CakeTestCase {
 		'plugin.seo.seo_url'
 	);
 
-	public function startTest() {
+	public function setUp() {
+		parent::setUp();
 		$this->SeoUrl = ClassRegistry::init('SeoUrl');
 	}
 
@@ -62,7 +63,8 @@ class SeoUrlTest extends CakeTestCase {
 		$this->assertEquals('23', $result);
 	}
 
-	public function endTest() {
+	public function tearDown() {
+		parent::tearDown();
 		unset($this->SeoUrl);
 		ClassRegistry::flush();
 	}

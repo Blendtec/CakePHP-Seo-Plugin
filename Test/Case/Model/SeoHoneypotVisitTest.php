@@ -6,7 +6,8 @@ class SeoHoneypotVisitTest extends CakeTestCase {
 
 	public $fixtures = array('plugin.seo.seo_honeypot_visit');
 
-	public function startTest() {
+	public function setUp() {
+		parent::setUp();
 		$this->SeoHoneypotVisit = ClassRegistry::init('SeoHoneypotVisit');
 	}
 
@@ -51,7 +52,8 @@ class SeoHoneypotVisitTest extends CakeTestCase {
 		$this->assertTrue($this->SeoHoneypotVisit->isTriggered('127.255.253.120'));
 	}
 
-	public function endTest() {
+	public function tearDown() {
+		parent::tearDown();
 		unset($this->SeoHoneypotVisit);
 		ClassRegistry::flush();
 	}

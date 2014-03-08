@@ -74,7 +74,8 @@ class SeoUriTest extends CakeTestCase {
 		$this->assertFalse($this->SeoUri->SeoRedirect->hasAny(array('id' => '5313b3c4-cf4c-42ff-a6a8-0c06ccb469e7')));
 	}
 
-	public function endTest() {
+	public function tearDown() {
+		parent::tearDown();
 		unset($this->SeoUri);
 		ClassRegistry::flush();
 	}
