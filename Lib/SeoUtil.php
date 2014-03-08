@@ -73,7 +73,12 @@ class SeoUtil extends Object {
 			return self::$configs[$key];
 		}
 		//try load configuration file and try again.
+		try{
 		Configure::load('seo');
+		} catch(ConfigureException $e) {
+			Configure::load('Seo.seo');
+		}
+		//debug(Configure::load('seo'));
 		self::$configs = Configure::read('Seo');
 		if (self::$configs[$key] = Configure::read("Seo.$key")) {
 			return self::$configs[$key];
