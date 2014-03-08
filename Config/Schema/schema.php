@@ -9,8 +9,8 @@ class SeoSchema extends CakeSchema {
 	}
 
 	public $seo_a_b_tests = array(
-        'id' => array('type'=>'string', 'null' => false, 'default' => NULL, 'length' => 36, 'key' => 'primary'),
-        'seo_uri_id' => array ('type' => 'string', 'null' => false, 'default' => null, 'length' => 36, 'key' => 'index'),
+		'id' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 36, 'key' => 'primary'),
+		'seo_uri_id' => array ('type' => 'string', 'null' => false, 'default' => null, 'length' => 36, 'key' => 'index'),
 		'is_active' => array('type' => 'boolean', 'null' => false, 'default' => '1', 'key' => 'index'),
 		'slug' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 50, 'key' => 'unique', 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'roll' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 200, 'collate' => 'utf8_general_ci', 'comment' => 'int based roll or Model::function callback', 'charset' => 'utf8'),
@@ -50,8 +50,8 @@ class SeoSchema extends CakeSchema {
 	);
 
 	public $seo_canonicals = array(
-        'id' => array('type'=>'string', 'null' => false, 'default' => NULL, 'length' => 36, 'key' => 'primary'),
-        'seo_uri_id' => array ('type' => 'string', 'null' => false, 'default' => null, 'length' => 36, 'key' => 'index'),
+		'id' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 36, 'key' => 'primary'),
+		'seo_uri_id' => array ('type' => 'string', 'null' => false, 'default' => null, 'length' => 36, 'key' => 'index'),
 		'canonical' => array('type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'is_active' => array('type' => 'boolean', 'null' => false, 'default' => '1'),
 		'created' => array('type' => 'datetime', 'null' => true, 'default' => null),
@@ -64,7 +64,7 @@ class SeoSchema extends CakeSchema {
 	);
 
 	public $seo_honeypot_visits = array(
-        'id' => array('type'=>'string', 'null' => false, 'default' => NULL, 'length' => 36, 'key' => 'primary'),
+		'id' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 36, 'key' => 'primary'),
 		'ip' => array('type' => 'biginteger', 'null' => false, 'default' => null, 'key' => 'index'),
 		'created' => array('type' => 'datetime', 'null' => true, 'default' => null),
 		'indexes' => array(
@@ -75,8 +75,8 @@ class SeoSchema extends CakeSchema {
 	);
 
 	public $seo_meta_tags = array(
-        'id' => array('type'=>'string', 'null' => false, 'default' => NULL, 'length' => 36, 'key' => 'primary'),
-        'seo_uri_id' => array ('type' => 'string', 'null' => false, 'default' => null, 'length' => 36, 'key' => 'index'),
+		'id' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 36, 'key' => 'primary'),
+		'seo_uri_id' => array ('type' => 'string', 'null' => false, 'default' => null, 'length' => 36, 'key' => 'index'),
 		'name' => array('type' => 'string', 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'content' => array('type' => 'string', 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'is_http_equiv' => array('type' => 'boolean', 'null' => false, 'default' => '0'),
@@ -90,8 +90,8 @@ class SeoSchema extends CakeSchema {
 	);
 
 	public $seo_redirects = array(
-        'id' => array('type'=>'string', 'null' => false, 'default' => NULL, 'length' => 36, 'key' => 'primary'),
-        'seo_uri_id' => array ('type' => 'string', 'null' => false, 'default' => null, 'length' => 36, 'key' => 'index'),
+		'id' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 36, 'key' => 'primary'),
+		'seo_uri_id' => array ('type' => 'string', 'null' => false, 'default' => null, 'length' => 36, 'key' => 'index'),
 		'redirect' => array('type' => 'string', 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'priority' => array('type' => 'integer', 'null' => false, 'default' => '100'),
 		'is_active' => array('type' => 'boolean', 'null' => false, 'default' => '1'),
@@ -106,7 +106,7 @@ class SeoSchema extends CakeSchema {
 	);
 
 	public $seo_search_terms = array(
-        'id' => array('type'=>'string', 'null' => false, 'default' => NULL, 'length' => 36, 'key' => 'primary'),
+		'id' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 36, 'key' => 'primary'),
 		'term' => array('type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => 'The term found by Google', 'charset' => 'utf8'),
 		'uri' => array('type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => 'The URL this term points to', 'charset' => 'utf8'),
 		'count' => array('type' => 'integer', 'null' => false, 'default' => null, 'comment' => 'how many times this term has been searched for'),
@@ -118,8 +118,8 @@ class SeoSchema extends CakeSchema {
 	);
 
 	public $seo_status_codes = array(
-        'id' => array('type'=>'string', 'null' => false, 'default' => NULL, 'length' => 36, 'key' => 'primary'),
-        'seo_uri_id' => array ('type' => 'string', 'null' => false, 'default' => null, 'length' => 36, 'key' => 'index'),
+		'id' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 36, 'key' => 'primary'),
+		'seo_uri_id' => array ('type' => 'string', 'null' => false, 'default' => null, 'length' => 36, 'key' => 'index'),
 		'status_code' => array('type' => 'integer', 'null' => false, 'default' => null, 'length' => 3),
 		'priority' => array('type' => 'integer', 'null' => false, 'default' => '100', 'length' => 4),
 		'is_active' => array('type' => 'boolean', 'null' => false, 'default' => '1'),
@@ -133,8 +133,8 @@ class SeoSchema extends CakeSchema {
 	);
 
 	public $seo_titles = array(
-        'id' => array('type'=>'string', 'null' => false, 'default' => NULL, 'length' => 36, 'key' => 'primary'),
-        'seo_uri_id' => array ('type' => 'string', 'null' => false, 'default' => null, 'length' => 36, 'key' => 'index'),
+		'id' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 36, 'key' => 'primary'),
+		'seo_uri_id' => array ('type' => 'string', 'null' => false, 'default' => null, 'length' => 36, 'key' => 'index'),
 		'title' => array('type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'created' => array('type' => 'datetime', 'null' => true, 'default' => null),
 		'modified' => array('type' => 'datetime', 'null' => true, 'default' => null),
@@ -146,7 +146,7 @@ class SeoSchema extends CakeSchema {
 	);
 
 	public $seo_uris = array(
-        'id' => array('type'=>'string', 'null' => false, 'default' => NULL, 'length' => 36, 'key' => 'primary'),
+		'id' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 36, 'key' => 'primary'),
 		'uri' => array('type' => 'string', 'null' => true, 'default' => null, 'key' => 'unique', 'collate' => 'utf8_bin', 'charset' => 'utf8'),
 		'is_approved' => array('type' => 'boolean', 'null' => false, 'default' => '1', 'key' => 'index'),
 		'created' => array('type' => 'datetime', 'null' => true, 'default' => null),
@@ -160,7 +160,7 @@ class SeoSchema extends CakeSchema {
 	);
 
 	public $seo_urls = array(
-        'id' => array('type'=>'string', 'null' => false, 'default' => NULL, 'length' => 36, 'key' => 'primary'),
+		'id' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 36, 'key' => 'primary'),
 		'url' => array('type' => 'string', 'null' => false, 'default' => null, 'key' => 'unique', 'collate' => 'utf8_bin', 'charset' => 'utf8'),
 		'priority' => array('type' => 'float', 'null' => false, 'default' => null, 'key' => 'index'),
 		'created' => array('type' => 'datetime', 'null' => true, 'default' => null),

@@ -27,10 +27,10 @@ class SeoABTestTest extends CakeTestCase {
 		$this->SeoABTest = ClassRegistry::init('Seo.SeoABTest');
 	}
 /**
-*
-*
-* @return void
-*/
+ * Test Instance
+ *
+ * @return void
+ */
 	public function testInstance() {
 		$this->assertTrue(is_a($this->SeoABTest, 'SeoABTest'));
 	}

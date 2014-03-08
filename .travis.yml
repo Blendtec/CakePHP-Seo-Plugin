@@ -1,5 +1,9 @@
 language: php
 
+branches:
+  only:
+    - develop
+
 php:
   - 5.3
   - 5.4

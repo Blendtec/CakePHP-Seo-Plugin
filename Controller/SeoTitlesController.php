@@ -64,4 +64,3 @@ class SeoTitlesController extends SeoAppController {
 		$this->redirect(array('action' => 'index'));
 	}
 }
-?>

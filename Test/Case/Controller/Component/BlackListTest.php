@@ -24,21 +24,21 @@ class BlackListTest extends CakeTestCase {
 	}
 
 	public function testIsBannedRedirect() {
-//		$this->BlackListComponent->Controller->here = '/';
-//		$this->BlackListComponent->Controller->expectOnce('redirect');
-//		$this->assertTrue($this->BlackList->isBanned());
+		//$this->BlackListComponent->Controller->here = '/';
+		//$this->BlackListComponent->Controller->expectOnce('redirect');
+		//$this->assertTrue($this->BlackList->isBanned());
 	}
 
 	public function testIsBannedOnBannedPage() {
-//		$this->BlackListComponent->Controller->here = '/seo/seo_blacklists/banned';
-//		$this->BlackListComponent->Controller->expectNever('redirect');
-//		$this->assertTrue($this->BlackList->isBanned());
+		//$this->BlackListComponent->Controller->here = '/seo/seo_blacklists/banned';
+		//$this->BlackListComponent->Controller->expectNever('redirect');
+		//$this->assertTrue($this->BlackList->isBanned());
 	}
 
 	public function testHandleHoneyPot() {
-//		$this->BlackListComponent->Controller->here = '/seo/seo_blacklists/honeypot';
-//		$this->BlackListComponent->Controller->expectOnce('redirect');
-//		$this->assertTrue($this->BlackList->isBanned());
+		//$this->BlackListComponent->Controller->here = '/seo/seo_blacklists/honeypot';
+		//$this->BlackListComponent->Controller->expectOnce('redirect');
+		//$this->assertTrue($this->BlackList->isBanned());
 	}
 
 	public function tearDown() {

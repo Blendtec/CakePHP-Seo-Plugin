@@ -113,4 +113,3 @@ class SeoHelperTest extends CakeTestCase {
 	}
 
 }
-?>

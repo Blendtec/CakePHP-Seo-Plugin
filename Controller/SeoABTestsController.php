@@ -1,5 +1,5 @@
 <?php
-App::uses('SeoAppController','Seo.Controller');
+App::uses('SeoAppController', 'Seo.Controller');
 class SeoABTestsController extends SeoAppController {
 
 	public $paginate = array(
@@ -10,14 +10,14 @@ class SeoABTestsController extends SeoAppController {
 		parent::beforeFilter();
 		$this->set('slots', $this->SeoABTest->slots);
 	}
-	
+
 	public function admin_index() {
 		$this->Prg->commonProcess(null, array('action' => 'index'));
 		$this->Paginator->settings['conditions']
 			= $this->SeoABTest->parseCriteria($this->passedArgs);
 		$this->set('seoABTests', $this->Paginator->paginate($this->SeoABTest->alias));
 	}
-	
+
 	public function admin_view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid seo AB Test'));
@@ -61,14 +61,13 @@ class SeoABTestsController extends SeoAppController {
 	public function admin_delete($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid id for seo AB Test'));
-			$this->redirect(array('action'=>'index'));
+			$this->redirect(array('action' => 'index'));
 		}
 		if ($this->SeoABTest->delete($id)) {
 			$this->Session->setFlash(__('Seo AB Test deleted'));
-			$this->redirect(array('action'=>'index'));
+			$this->redirect(array('action' => 'index'));
 		}
 		$this->Session->setFlash(__('Seo AB Test was not deleted'));
 		$this->redirect(array('action' => 'index'));
 	}
 }
-?>

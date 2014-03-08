@@ -38,7 +38,7 @@ class SeoAppError {
 	public function runLevenshtein() {
 		$this->__uriToLevenshtein();
 	}
-	
+
 /**
  * Returns if the incomming request matches the seo_uri defined.
  * @param incomming request
@@ -167,7 +167,6 @@ class SeoAppError {
 			}
 			$this->controller->redirect($redirect['redirect'], 301);
 		}
-		return;
 	}
 
 /**
