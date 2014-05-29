@@ -3,7 +3,7 @@ App::uses('SeoAppController', 'Seo.Controller');
 class SeoTitlesController extends SeoAppController {
 
 	public function admin_index() {
-		$this->Prg->commonProcess($this->SeoTitle->alias, array('action' => 'index'));
+		$this->Prg->commonProcess();
 		$this->Paginator->settings['conditions']
 			= $this->SeoTitle->parseCriteria($this->passedArgs);
 		$this->set('seoTitles', $this->Paginator->paginate($this->SeoTitle->alias));

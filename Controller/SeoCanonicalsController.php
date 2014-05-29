@@ -3,7 +3,7 @@ App::uses('SeoAppController', 'Seo.Controller');
 class SeoCanonicalsController extends SeoAppController {
 
 	public function admin_index() {
-		$this->Prg->commonProcess($this->SeoCanonical->alias, array('action' => 'index'));
+		$this->Prg->commonProcess();
 		$this->Paginator->settings['conditions']
 			= $this->SeoCanonical->parseCriteria($this->passedArgs);
 		$this->set('seoCanonicals', $this->Paginator->paginate($this->SeoCanonical->alias));

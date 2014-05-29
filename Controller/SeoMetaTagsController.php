@@ -3,7 +3,7 @@ App::uses('SeoAppController', 'Seo.Controller');
 class SeoMetaTagsController extends SeoAppController {
 
 	public function admin_index() {
-		$this->Prg->commonProcess($this->SeoMetaTag->alias, array('action' => 'index'));
+		$this->Prg->commonProcess();
 		$this->Paginator->settings['conditions']
 			= $this->SeoMetaTag->parseCriteria($this->passedArgs);
 		$this->set('seoMetaTags', $this->Paginator->paginate($this->SeoMetaTag->alias));

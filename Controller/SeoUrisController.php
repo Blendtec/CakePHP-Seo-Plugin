@@ -17,7 +17,7 @@ class SeoUrisController extends SeoAppController {
 	}
 
 	public function admin_index() {
-		$this->Prg->commonProcess(null, array('action' => 'index'));
+		$this->Prg->commonProcess();
 		$this->Paginator->settings['conditions']
 		= $this->SeoUri->parseCriteria($this->passedArgs);
 		$this->set('seoUris', $this->Paginator->paginate($this->SeoUri->alias));
